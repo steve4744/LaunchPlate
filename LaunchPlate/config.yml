@@ -1,0 +1,36 @@
+##########################################
+# LaunchPlate default configuration file #
+#                                        #
+# Create a spring board using any block  #
+# and pressure plate.                    #
+##########################################
+#  Block beneath the pressure plate
+Material: OBSIDIAN
+#
+#  Type of pressure plate. Must be GOLD_PLATE, WOOD_PLATE, IRON_PLATE or STONE_PLATE.
+Plate: GOLD_PLATE
+#
+#  Height for vertical bounce. Rough Guide: 1.8 = 16 blocks, 4.0 = 60 blocks, 8.0 = 128 blocks.
+Force: 0.8
+#
+#  Vertical bounce only. If true, player is sent straight up, forward velocity is controlled by 'w' key.
+Vertical_Bounce: true
+#
+#  Magnitude for trajectory if Vertical_Bounce is false. Height is also controlled by where you are looking.
+#  If you are looking down then you don't take off!
+#  Rough guide: 1.0 = max 5 blocks high, 2.5 = max 28 blocks high, 4.0 = max 64 blocks high.
+Magnitude: 2.5
+#
+#  Add a launch sound (optional). Remove the '#' from one of the Sounds to activate. A list of available sounds 
+#  for MC 1.12 can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html.
+#Sound: ENTITY_FIREWORK_LAUNCH
+#Sound: ENTITY_ENDERMEN_SCREAM
+#Sound: ENTITY_WOLF_HOWL
+#
+#  Add a particle effect on launch (optional). Remove the '#' from one of the Trails to activate. A list of available
+#  particle effects for MC 1.12 can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html.
+#Trail: SPELL_WITCH
+#Trail: REDSTONE
+#
+# Check for new version
+Check_For_Update: true

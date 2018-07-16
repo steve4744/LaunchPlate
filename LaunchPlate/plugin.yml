@@ -1,0 +1,16 @@
+name: LaunchPlate
+main: io.steve4744.LaunchPlate.LaunchPlate
+author: steve4744
+version: 1.7
+description: Launches player when steps on special pressure plate.
+commands:
+  launchplate:
+    aliases: [lp, launchplates]
+    description: LaunchPlate commands
+permissions:
+  launchplate.use:
+    description: used to control who can use launchplates and where.
+    default: true
+  launchplate.admin:
+    description: used to run "/lp reload" command and set config options.
+    default: op
