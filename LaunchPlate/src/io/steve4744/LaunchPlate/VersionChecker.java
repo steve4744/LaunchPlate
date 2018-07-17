@@ -20,7 +20,7 @@ public class VersionChecker {
 				return version;
 			}
 		} catch (Exception ex) {
-			Bukkit.getLogger().info("Failed to check for a update on Spigot.");
+			Bukkit.getLogger().info("Failed to check for an update on Spigot.");
 		}
 		return "error";
 	}

@@ -25,8 +25,8 @@ public class Settings {
 	private Particle trail;
 	private boolean debug;
 		
-	private final static Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PLATE, Material.WOOD_PLATE, Material.GOLD_PLATE, Material.IRON_PLATE));
-		
+	private final static Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PRESSURE_PLATE, Material.OAK_PRESSURE_PLATE, Material.BIRCH_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE, Material.ACACIA_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE));
+	
 	public Settings(LaunchPlate plugin){
 		
 		this.plugin = plugin;
@@ -56,11 +56,11 @@ public class Settings {
 			String forceCheck = "[Settings] Force = " + force;
 			String soundCheck = "[Settings] Sound = " + sound;
 			String trailCheck = "[Settings] Trail = " + trail;
-			System.out.println(blockCheck);
-			System.out.println(plateCheck);
-			System.out.println(forceCheck);
-			System.out.println(soundCheck);
-			System.out.println(trailCheck);
+			plugin.getLogger().info(blockCheck);
+			plugin.getLogger().info(plateCheck);
+			plugin.getLogger().info(forceCheck);
+			plugin.getLogger().info(soundCheck);
+			plugin.getLogger().info(trailCheck);
 		}
 	}
 	

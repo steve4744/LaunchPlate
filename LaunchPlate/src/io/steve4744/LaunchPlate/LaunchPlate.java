@@ -1,7 +1,10 @@
 package io.steve4744.LaunchPlate;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Particle.DustOptions;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -43,8 +46,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		
 		checkForUpdate();
 		
-		@SuppressWarnings("unused")
-		Metrics metrics = new Metrics(this);
+		new Metrics(this);
 	}
 		
 	@Override
@@ -65,7 +67,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 			return;
 		
 		double force = getSettings().getForce();
-
+		
 		if (block.getRelative(BlockFace.DOWN).getType() == getSettings().getMaterial() && block.getType() == getSettings().getPlate()) {
 			if (getSettings().isVertical()) {
 				// launch the player - force applied will be 4.0 max
@@ -77,6 +79,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 						boolean reLaunch = true;
 						double force = getSettings().getForce();
 						double newForce = 4.0;  // max force
+						@Override
 						public void run() {
 							if (!reLaunch || !player.isOnline()) {
 								this.cancel();
@@ -106,10 +109,15 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 			setMD(player,"noFall",true);
 			
 			if (getSettings().getParticle() != null) {
+				Particle p = getSettings().getParticle();
 				Location loc = player.getLocation().add(0, 0.5, 0);
-				player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50); 
+				DustOptions data = null;
+				if (p.getDataType() == Particle.DustOptions.class) {
+					data = new Particle.DustOptions(Color.RED, 1.5F);
+				}
+				player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50, data);
 			}
-		} 
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
@@ -132,7 +140,8 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		if(!getConfig().getBoolean("Check_For_Update", true)){
 			return;
 		}
-		Bukkit.getScheduler().runTaskLaterAsynchronously(this, new Runnable() {
+		new BukkitRunnable() {
+			@Override
 			public void run() {
 				String latestVersion = VersionChecker.getVersion();
 				if (latestVersion == "error") {
@@ -143,7 +152,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 					}
 				}
 			}
-		}, 40L);
+		}.runTaskLaterAsynchronously(this, 40L);
 	}
 
 	public Settings getSettings() {
