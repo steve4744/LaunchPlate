@@ -1,3 +1,27 @@
+/*
+ * MIT License
+
+Copyright (c) 2018 steve4744
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+ */
 package io.steve4744.LaunchPlate;
 
 import org.bukkit.Bukkit;
@@ -25,18 +49,20 @@ import io.steve4744.LaunchPlate.Metrics.Metrics;
 public class LaunchPlate extends JavaPlugin implements Listener {
 	
 	private String version;
-	private Settings setting;
+	private Settings settings;
+	private static LaunchPlate instance;
 		
 	@Override
 	public void onEnable() {
 
+		instance = this;
 		// Save a copy of the default config.yml if not exists
 		this.saveDefaultConfig();
 
 	    version = this.getDescription().getVersion();
 	    getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....enabled!").toString());
 	    
-	    this.setting = new Settings(this);
+	    settings = new Settings();
 	    new SetupConfig(this);
 	    
 	    this.getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
@@ -54,7 +80,11 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....disabled!").toString());
 	}
 		
-	public void setMD(Player player, String name, Object value) {
+	public static LaunchPlate getInstance() {
+		return instance;
+	}
+	
+	private void setMD(Player player, String name, Object value) {
 		player.setMetadata(name, new FixedMetadataValue(this, value));
 	}
 		
@@ -68,7 +98,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		
 		double force = getSettings().getForce();
 		
-		if (block.getRelative(BlockFace.DOWN).getType() == getSettings().getMaterial() && block.getType() == getSettings().getPlate()) {
+		if (block.getRelative(BlockFace.DOWN).getType() == getSettings().getLaunchBlock() && block.getType() == getSettings().getPlate()) {
 			if (getSettings().isVertical()) {
 				// launch the player - force applied will be 4.0 max
 				player.setVelocity(new Vector(player.getVelocity().getX(), player.getVelocity().getY() + force, player.getVelocity().getZ()));
@@ -101,7 +131,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 				Vector velocity = player.getLocation().getDirection().normalize();
 				player.setVelocity(velocity.multiply((double)getSettings().getMagnitude()));
 			}
-			
+
 			if (getSettings().getSound() != null) {
 				player.getWorld().playSound(player.getLocation(), getSettings().getSound(), 5.0F, 1F);
 			}
@@ -136,8 +166,8 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		}
 	}
 	
-	public void checkForUpdate() {
-		if(!getConfig().getBoolean("Check_For_Update", true)){
+	private void checkForUpdate() {
+		if (!getConfig().getBoolean("Check_For_Update", true)) {
 			return;
 		}
 		new BukkitRunnable() {
@@ -155,10 +185,11 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		}.runTaskLaterAsynchronously(this, 40L);
 	}
 
-	public Settings getSettings() {
-		return setting;
+	public static Settings getSettings() {
+		return getInstance().settings;
 	}
-	public void setSettings(Settings setting) {
-		this.setting = setting;
+	
+	public void refreshSettings(Settings settings) {
+		this.settings = settings;
 	}
 }
