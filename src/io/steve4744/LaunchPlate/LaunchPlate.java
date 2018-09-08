@@ -43,6 +43,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
 import io.steve4744.LaunchPlate.Settings;
 import io.steve4744.LaunchPlate.Metrics.Metrics;
 
@@ -65,7 +66,8 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	    settings = new Settings();
 	    new SetupConfig(this);
 	    
-	    this.getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
+	    getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
+	    getCommand("launchplate").setTabCompleter(new AutoTabCompleter());
 	    	    
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(this, this);
