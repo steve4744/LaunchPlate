@@ -109,9 +109,17 @@ public class LaunchPlateCommands implements CommandExecutor {
 					
 				} else if (args[0].equalsIgnoreCase("setPlate")) {
 					if (args.length >= 2) {
-						Material plate = Material.getMaterial(args[1].toUpperCase());
+						String plateMaterial;
+						if (args[1].equalsIgnoreCase("GOLD_PLATE") || args[1].equalsIgnoreCase("GOLD_PRESSURE_PLATE")) {
+							plateMaterial = "LIGHT_WEIGHTED_PRESSURE_PLATE";
+						} else if (args[1].equalsIgnoreCase("IRON_PLATE") || args[1].equalsIgnoreCase("IRON_PRESSURE_PLATE")) {
+							plateMaterial = "HEAVY_WEIGHTED_PRESSURE_PLATE";
+						} else {
+							plateMaterial = args[1];
+						}
+						Material plate = Material.getMaterial(plateMaterial.toUpperCase());
 						if (Settings.isValid(plate)) {
-							SetupConfig.setPlate(args[1].toUpperCase());
+							SetupConfig.setPlate(plateMaterial.toUpperCase());
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Plate material set to " + ChatColor.AQUA + args[1].toUpperCase());
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid plate material: " + ChatColor.RED + args[1]);
