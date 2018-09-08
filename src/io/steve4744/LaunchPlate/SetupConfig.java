@@ -63,4 +63,9 @@ public class SetupConfig {
 		plugin.getConfig().set("Plate", plate);
 		plugin.saveConfig();
 	}
+	
+	public static void setForce(Double force) {
+		plugin.getConfig().set("Force", force);
+		plugin.saveConfig();
+	}
 }

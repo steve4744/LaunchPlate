@@ -57,6 +57,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 					player.sendMessage(ChatColor.GREEN + "/lp setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- set the pressure plate Material");
 					player.sendMessage(ChatColor.GREEN + "/lp setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- set a launch sound effect");
 					player.sendMessage(ChatColor.GREEN + "/lp settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- set a launch particle effect");
+					player.sendMessage(ChatColor.GREEN + "/lp setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- set the height achieved, default is 0.8");
 					player.sendMessage(ChatColor.GREEN + "/lp reload " + ChatColor.WHITE + "- config reload, required after above commands");
 					player.sendMessage(ChatColor.GREEN + "/lp help " + ChatColor.WHITE + "- display this command help screen");
 					player.sendMessage(ChatColor.YELLOW + "\n===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
@@ -68,8 +69,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				}
 					
 				if (args[0].equalsIgnoreCase("reload")) {
-					plugin.reloadConfig();
-					//LaunchPlate.getInstance().reloadConfig(); 
+					plugin.reloadConfig(); 
 					plugin.refreshSettings(new Settings());
 					player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Config Reloaded");
 						
@@ -120,9 +120,22 @@ public class LaunchPlateCommands implements CommandExecutor {
 						player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "No plate material specified");
 					}	
 						
+				} else if (args[0].equalsIgnoreCase("setForce")) {
+					if (args.length >= 2) {
+						//Material plate = Material.getMaterial(args[1].toUpperCase());
+						if (Settings.isDouble(args[1])) {
+							SetupConfig.setForce(Double.valueOf(args[1]));
+							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Force set to " + ChatColor.AQUA + args[1]);
+						} else {
+							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid force: " + ChatColor.RED + args[1]);
+						}
+					} else {
+						player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "No value specified for force");
+					}	
+					
 				} else {
 					player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid argument - run " + ChatColor.GREEN + "/lp help " + ChatColor.WHITE + "for more information");
-				}
+				} 
 				
 			} else {
 				if (sender instanceof ConsoleCommandSender) {

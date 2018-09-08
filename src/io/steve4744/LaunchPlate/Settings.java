@@ -83,4 +83,12 @@ public class Settings {
 	public static boolean isValid(Material plate) {
 		return values.contains(plate);
 	}
+	
+	public static boolean isDouble(String text) {
+		try {
+			Double.parseDouble(text);
+			return true;
+		} catch (NumberFormatException e) {}
+		return false;
+	}
 }
