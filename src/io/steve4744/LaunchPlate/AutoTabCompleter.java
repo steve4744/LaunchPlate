@@ -57,7 +57,7 @@ public class AutoTabCompleter implements TabCompleter {
 				list.add("reload");
 			}
 			
-		} else if (args.length == 2) {
+		} else if (args.length == 2 && sender.hasPermission("launchplate.admin")) {
 			if (args[0].equalsIgnoreCase("setsound")) {
 				for (Sound sound : EnumUtils.getEnumList(Sound.class)) {
 					list.add(String.valueOf(sound));
@@ -67,6 +67,18 @@ public class AutoTabCompleter implements TabCompleter {
 				for (Particle particle : EnumUtils.getEnumList(Particle.class)) {
 					list.add(String.valueOf(particle));
 				}
+			} else if (args[0].equalsIgnoreCase("setplate")) {
+				list.add("iron_plate");
+				list.add("gold_plate");
+				list.add("oak_pressure_plate");
+				list.add("dark_oak_pressure_plate");
+				list.add("birch_pressure_plate");
+				list.add("jungle_pressure_plate");
+				list.add("spruce_pressure_plate");
+				list.add("acacia_pressure_plate");
+				list.add("stone_pressure_plate");
+				list.add("light_weighted_pressure_plate");
+				list.add("heavy_weighted_pressure_plate");
 			}
 		}
 		for (String s : list) {
