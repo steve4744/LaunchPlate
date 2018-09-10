@@ -57,7 +57,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 					player.sendMessage(ChatColor.GREEN + "/lp setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- set the pressure plate Material");
 					player.sendMessage(ChatColor.GREEN + "/lp setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- set a launch sound effect");
 					player.sendMessage(ChatColor.GREEN + "/lp settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- set a launch particle effect");
-					player.sendMessage(ChatColor.GREEN + "/lp setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- set the height achieved, default is 0.8");
+					player.sendMessage(ChatColor.GREEN + "/lp setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- determines height of bounce, default 0.8");
 					player.sendMessage(ChatColor.GREEN + "/lp reload " + ChatColor.WHITE + "- reload the LaunchPlate config");
 					player.sendMessage(ChatColor.GREEN + "/lp help " + ChatColor.WHITE + "- display this command help screen");
 					player.sendMessage(ChatColor.YELLOW + "\n===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
