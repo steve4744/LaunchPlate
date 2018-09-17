@@ -51,16 +51,28 @@ public class LaunchPlateCommands implements CommandExecutor {
 				if (args.length == 0) {
 					player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744");
 					return false;
+					
+				} else if(args[0].equalsIgnoreCase("list")) {
+					player.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
+					player.sendMessage(ChatColor.GREEN + "\nBase block material : " + ChatColor.WHITE + plugin.getSettings().getLaunchBlock());
+					player.sendMessage(ChatColor.GREEN + "Pressure plate type : " + ChatColor.WHITE + plugin.getSettings().getPlate());
+					player.sendMessage(ChatColor.GREEN + "Launch sound effect : " + ChatColor.WHITE + plugin.getSettings().getSound());
+					player.sendMessage(ChatColor.GREEN + "Launch particle effect : " + ChatColor.WHITE + plugin.getSettings().getParticle());
+					player.sendMessage(ChatColor.GREEN + "Upward force applied : " + ChatColor.WHITE + plugin.getSettings().getForce());
+					player.sendMessage(ChatColor.YELLOW + "\n===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
+					return false;
+					
 				} else if(args[0].equalsIgnoreCase("help")) {
 					player.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
 					player.sendMessage(ChatColor.GREEN + "\n/lp setblock" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- set the Material for the base block");
 					player.sendMessage(ChatColor.GREEN + "/lp setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- set the pressure plate Material");
 					player.sendMessage(ChatColor.GREEN + "/lp setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- set a launch sound effect");
 					player.sendMessage(ChatColor.GREEN + "/lp settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- set a launch particle effect");
-					player.sendMessage(ChatColor.GREEN + "/lp setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- determines height of bounce, default 0.8");
+					player.sendMessage(ChatColor.GREEN + "/lp setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- force determines height of bounce");
+					player.sendMessage(ChatColor.GREEN + "/lp list " + ChatColor.WHITE + "- list the current LaunchPlate setttings");
 					player.sendMessage(ChatColor.GREEN + "/lp reload " + ChatColor.WHITE + "- reload the LaunchPlate config");
 					player.sendMessage(ChatColor.GREEN + "/lp help " + ChatColor.WHITE + "- display this command help screen");
-					player.sendMessage(ChatColor.YELLOW + "\n===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
+					//player.sendMessage(ChatColor.YELLOW + "\n===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
 					return false;
 				}
 				if (!player.hasPermission("launchplate.admin")) {
@@ -130,7 +142,6 @@ public class LaunchPlateCommands implements CommandExecutor {
 						
 				} else if (args[0].equalsIgnoreCase("setForce")) {
 					if (args.length >= 2) {
-						//Material plate = Material.getMaterial(args[1].toUpperCase());
 						if (Settings.isDouble(args[1])) {
 							SetupConfig.setForce(Double.valueOf(args[1]));
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Force set to " + ChatColor.AQUA + args[1]);

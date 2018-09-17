@@ -187,7 +187,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		}.runTaskLaterAsynchronously(this, 40L);
 	}
 
-	public static Settings getSettings() {
+	public Settings getSettings() {
 		return getInstance().settings;
 	}
 	

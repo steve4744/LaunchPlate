@@ -48,6 +48,7 @@ public class AutoTabCompleter implements TabCompleter {
 		
 		if (args.length == 1) {
 			list.add("help");
+			list.add("list");
 			if (sender.hasPermission("launchplate.admin")) {
 				list.add("setblock");
 				list.add("setplate");
