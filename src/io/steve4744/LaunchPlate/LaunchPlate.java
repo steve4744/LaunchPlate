@@ -62,49 +62,49 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 
 	    version = this.getDescription().getVersion();
 	    getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....enabled!").toString());
-	    
+
 	    settings = new Settings();
 	    new SetupConfig(this);
-	    
+
 	    getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
 	    getCommand("launchplate").setTabCompleter(new AutoTabCompleter());
-	    	    
+
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(this, this);
-		
+
 		checkForUpdate();
-		
+
 		new Metrics(this);
 	}
-		
+
 	@Override
 	public void onDisable() {
 		getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....disabled!").toString());
 	}
-		
+
 	public static LaunchPlate getInstance() {
 		return instance;
 	}
-	
+
 	private void setMD(Player player, String name, Object value) {
 		player.setMetadata(name, new FixedMetadataValue(this, value));
 	}
-		
+
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent m) {
 		Player player = m.getPlayer();
-		Block block = m.getTo().getBlock();
-			
+
 		if (!player.hasPermission("launchplate.use"))
 			return;
-		
+
+		Block block = m.getTo().getBlock();
 		double force = getSettings().getForce();
-		
+
 		if (block.getRelative(BlockFace.DOWN).getType() == getSettings().getLaunchBlock() && block.getType() == getSettings().getPlate()) {
 			if (getSettings().isVertical()) {
 				// launch the player - force applied will be 4.0 max
 				player.setVelocity(new Vector(player.getVelocity().getX(), player.getVelocity().getY() + force, player.getVelocity().getZ()));
-				
+
 				// if the force is > max allowed, then re-launch player after 10 ticks
 				if (force > 4.0) {
 					new BukkitRunnable() {
@@ -137,9 +137,15 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 			if (getSettings().getSound() != null) {
 				player.getWorld().playSound(player.getLocation(), getSettings().getSound(), 5.0F, 1F);
 			}
-			
-			setMD(player,"noFall",true);
-			
+
+			//on a double bounce, this has to come after the damage event
+			new BukkitRunnable() {
+				@Override
+				public void run() {
+					setMD(player,"noFall",true);
+				}
+			}.runTask(this);
+
 			if (getSettings().getParticle() != null) {
 				Particle p = getSettings().getParticle();
 				Location loc = player.getLocation().add(0, 0.5, 0);
@@ -151,23 +157,24 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 			}
 		}
 	}
-	
+
 	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onPlayerDamage(EntityDamageEvent d) {
-		if (d.getEntity() instanceof Player) {
-			Player p = (Player) d.getEntity();
-			if (d.getCause() == DamageCause.FALL) {
-				if (p.hasMetadata("noFall")) {
-					boolean noFall = p.getMetadata("noFall").get(0).asBoolean();
-					if (noFall == true) {
-						d.setCancelled(true);
-					}
-					setMD(p,"noFall",false);
-				}		
-			}
+	public void onPlayerDamage(EntityDamageEvent e) {
+		if (!(e.getEntity() instanceof Player)) {
+			return;
+		}
+		Player p = (Player) e.getEntity();
+		if (e.getCause() == DamageCause.FALL) {
+			if (p.hasMetadata("noFall")) {
+				boolean noFall = p.getMetadata("noFall").get(0).asBoolean();
+				if (noFall == true) {
+					e.setCancelled(true);
+				}
+				setMD(p,"noFall",false);
+			}		
 		}
 	}
-	
+
 	private void checkForUpdate() {
 		if (!getConfig().getBoolean("Check_For_Update", true)) {
 			return;
