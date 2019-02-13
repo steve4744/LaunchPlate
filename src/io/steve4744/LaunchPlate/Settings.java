@@ -43,7 +43,7 @@ public class Settings {
 	private final LaunchPlate plugin;
 	private FileConfiguration config;
 		
-	private final Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PRESSURE_PLATE, Material.OAK_PRESSURE_PLATE, Material.BIRCH_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE, Material.ACACIA_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE));
+	private final Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PLATE, Material.WOOD_PLATE, Material.GOLD_PLATE, Material.IRON_PLATE));
 	
 	public Settings(LaunchPlate plugin) {
 		this.plugin = plugin;

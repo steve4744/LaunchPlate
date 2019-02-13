@@ -122,10 +122,10 @@ public class LaunchPlateCommands implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("setPlate")) {
 					if (args.length >= 2) {
 						String plateMaterial;
-						if (args[1].equalsIgnoreCase("GOLD_PLATE") || args[1].equalsIgnoreCase("GOLD_PRESSURE_PLATE")) {
-							plateMaterial = "LIGHT_WEIGHTED_PRESSURE_PLATE";
-						} else if (args[1].equalsIgnoreCase("IRON_PLATE") || args[1].equalsIgnoreCase("IRON_PRESSURE_PLATE")) {
-							plateMaterial = "HEAVY_WEIGHTED_PRESSURE_PLATE";
+						if (args[1].equalsIgnoreCase("LIGHT_WEIGHTED_PRESSURE_PLATE") || args[1].equalsIgnoreCase("GOLD_PRESSURE_PLATE")) {
+							plateMaterial = "GOLD_PLATE";
+						} else if (args[1].equalsIgnoreCase("HEAVY_WEIGHTED_PRESSURE_PLATE") || args[1].equalsIgnoreCase("IRON_PRESSURE_PLATE")) {
+							plateMaterial = "IRON_PLATE";
 						} else {
 							plateMaterial = args[1];
 						}

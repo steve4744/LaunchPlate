@@ -7,8 +7,8 @@
 #  Block beneath the pressure plate
 Material: OBSIDIAN
 #
-#  Type of pressure plate. For example: HEAVY_WEIGHTED_PRESSURE_PLATE, SPRUCE_PRESSURE_PLATE, STONE_PRESSURE_PLATE, etc.
-Plate: HEAVY_WEIGHTED_PRESSURE_PLATE
+#  Type of pressure plate. For example: GOLD_PLATE, IRON_PLATE, WOOD_PLATE or STONE_PLATE
+Plate: GOLD_PLATE
 #
 #  Height for vertical bounce. Rough Guide: 1.8 = 16 blocks, 4.0 = 60 blocks, 8.0 = 128 blocks.
 Force: 0.8
@@ -21,16 +21,10 @@ Vertical_Bounce: true
 #  Rough guide: 1.0 = max 5 blocks high, 2.5 = max 28 blocks high, 4.0 = max 64 blocks high.
 Magnitude: 2.5
 #
-#  Add a launch sound (optional). Remove the '#' from one of the Sounds to activate. A list of available sounds 
-#  for MC 1.13.1 can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html.
-#Sound: ENTITY_DRAGON_FIREBALL_EXPLODE
-#Sound: ENTITY_EVOKER_PREPARE_WOLOLO
-#Sound: ENTITY_FIREWORK_ROCKET_LAUNCH
+#  Add a launch sound (optional). Remove the '#' from one of the Sounds to activate. Use TAB Completion in-game to select.
+#Sound: BLOCK_NOTE_PLING
 #
-#  Add a particle effect on launch (optional). Remove the '#' from one of the Trails to activate. A list of available
-#  particle effects for MC 1.13.1 can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html.
-#Trail: SPELL_WITCH
-#Trail: SQUID_INK
+#  Add a particle effect on launch (optional). Remove the '#' from one of the Trails to activate. Use TAB Completion in-game to select.
 #Trail: REDSTONE
 #
 # Check for new version

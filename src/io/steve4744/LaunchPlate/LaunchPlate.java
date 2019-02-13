@@ -25,10 +25,7 @@ SOFTWARE.
 package io.steve4744.LaunchPlate;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Particle.DustOptions;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -147,13 +144,8 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 			}.runTask(this);
 
 			if (getSettings().getParticle() != null) {
-				Particle p = getSettings().getParticle();
 				Location loc = player.getLocation().add(0, 0.5, 0);
-				DustOptions data = null;
-				if (p.getDataType() == Particle.DustOptions.class) {
-					data = new Particle.DustOptions(Color.RED, 1.5F);
-				}
-				player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50, data);
+				player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50);
 			}
 		}
 	}
