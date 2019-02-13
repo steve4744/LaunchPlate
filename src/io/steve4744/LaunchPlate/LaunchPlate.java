@@ -51,7 +51,6 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	
 	private String version;
 	private Settings settings;
-	private SetupConfig cfg;
 	private static LaunchPlate instance;
 		
 	@Override
@@ -64,8 +63,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	    version = this.getDescription().getVersion();
 	    getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....enabled!").toString());
 
-	    settings = new Settings();
-	    cfg = new SetupConfig(this);
+	    settings = new Settings(this);
 
 	    getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
 	    getCommand("launchplate").setTabCompleter(new AutoTabCompleter());
@@ -80,10 +78,11 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 
 	@Override
 	public void onDisable() {
+		settings = null;
 		getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....disabled!").toString());
 	}
 
-	public static LaunchPlate getInstance() {
+	public LaunchPlate getInstance() {
 		return instance;
 	}
 
@@ -122,7 +121,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 								newForce = force - 2;
 								reLaunch = false;
 							}
-							
+
 							// keep re-launching player until is newForce is < 4.0
 							player.setVelocity(new Vector(player.getVelocity().getX(), newForce, player.getVelocity().getZ()));
 							force = force - 2;	
@@ -198,12 +197,9 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	public Settings getSettings() {
 		return settings;
 	}
-	
-	public void refreshSettings(Settings settings) {
-		this.settings = settings;
+
+	public void refreshSettings() {
+		this.settings = new Settings(this);
 	}
 
-	public SetupConfig getCfg() {
-		return cfg;
-	}
 }

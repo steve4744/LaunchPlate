@@ -40,55 +40,94 @@ public class Settings {
 	
 	private Sound sound;
 	private Particle trail;
+	private final LaunchPlate plugin;
+	private FileConfiguration config;
 		
-	private final static Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PRESSURE_PLATE, Material.OAK_PRESSURE_PLATE, Material.BIRCH_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE, Material.ACACIA_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE));
+	private final Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PRESSURE_PLATE, Material.OAK_PRESSURE_PLATE, Material.BIRCH_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE, Material.ACACIA_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE));
 	
-	FileConfiguration config = LaunchPlate.getInstance().getConfig();
-	
+	public Settings(LaunchPlate plugin) {
+		this.plugin = plugin;
+		config = plugin.getConfig();
+	}
+
 	public Material getLaunchBlock() {
 		return Material.getMaterial(config.getString("Material").toUpperCase());
 	}
-	
+
 	public Material getPlate() {
 		Material plate = Material.getMaterial(config.getString("Plate").toUpperCase());	
 		return isValid(plate) ? plate : null;
 	}
-	
+
 	public double getForce() {
 		return config.getDouble("Force");
 	}
-	
+
 	public boolean isVertical() {
 		return config.getBoolean("Vertical_Bounce");
 	}
-	
+
 	public double getMagnitude() {
 		return config.getDouble("Magnitude");
 	}
-	
+
 	public Sound getSound() {
 		if (EnumUtils.isValidEnum(Sound.class, config.getString("Sound"))) {
 			sound = Sound.valueOf(config.getString("Sound"));
 		}
 		return sound;
 	}
-	
+
 	public Particle getParticle() {
 		if (EnumUtils.isValidEnum(Particle.class, config.getString("Trail"))) {
 			trail = Particle.valueOf(config.getString("Trail"));
 		}
 		return trail;
 	}
-	
-	public static boolean isValid(Material plate) {
+
+	public boolean isValid(Material plate) {
 		return values.contains(plate);
 	}
-	
-	public static boolean isDouble(String text) {
+
+	public boolean isDouble(String text) {
 		try {
 			Double.parseDouble(text);
 			return true;
 		} catch (NumberFormatException e) {}
 		return false;
 	}
+
+	public boolean setSound(String soundEffect) {
+		if (EnumUtils.isValidEnum(Sound.class, soundEffect)) {
+			plugin.getConfig().set("Sound", soundEffect);
+			plugin.saveConfig();
+			return true;
+		}
+		return false;
+	}
+
+	public boolean setParticle(String particleEffect) {
+		if (EnumUtils.isValidEnum(Particle.class, particleEffect)) {
+			plugin.getConfig().set("Trail", particleEffect);
+			plugin.saveConfig();
+			return true;
+		}
+		return false;
+	}
+
+	public void setMaterial(String material) {
+		plugin.getConfig().set("Material", material);
+		plugin.saveConfig();
+	}
+
+	public void setPlate(String plate) {
+		plugin.getConfig().set("Plate", plate);
+		plugin.saveConfig();
+	}
+
+	public void setForce(Double force) {
+		plugin.getConfig().set("Force", force);
+		plugin.saveConfig();
+	}
+
 }

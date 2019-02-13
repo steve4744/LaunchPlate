@@ -36,16 +36,16 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
 public class AutoTabCompleter implements TabCompleter {
-	
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
 		if (!(sender instanceof Player)) {
 			return null;
 		}
-		
+
 		List<String> list = new ArrayList<String>();
 		List<String> auto = new ArrayList<String>();
-		
+
 		if (args.length == 1) {
 			list.add("help");
 			list.add("list");
@@ -57,13 +57,13 @@ public class AutoTabCompleter implements TabCompleter {
 				list.add("setforce");
 				list.add("reload");
 			}
-			
+
 		} else if (args.length == 2 && sender.hasPermission("launchplate.admin")) {
 			if (args[0].equalsIgnoreCase("setsound")) {
 				for (Sound sound : EnumUtils.getEnumList(Sound.class)) {
 					list.add(String.valueOf(sound));
 				}
-			
+
 			} else if (args[0].equalsIgnoreCase("settrail")) {
 				for (Particle particle : EnumUtils.getEnumList(Particle.class)) {
 					list.add(String.valueOf(particle));
@@ -87,7 +87,7 @@ public class AutoTabCompleter implements TabCompleter {
 				auto.add(s);
 			}
 		}
-		
+
 		return auto.isEmpty() ? list : auto;
 	}
 

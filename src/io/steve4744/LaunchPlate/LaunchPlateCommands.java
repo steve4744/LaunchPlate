@@ -82,12 +82,12 @@ public class LaunchPlateCommands implements CommandExecutor {
 					
 				if (args[0].equalsIgnoreCase("reload")) {
 					plugin.reloadConfig(); 
-					plugin.refreshSettings(new Settings());
+					plugin.refreshSettings();
 					player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Config Reloaded");
 						
 				} else if (args[0].equalsIgnoreCase("setsound")) {
 					if (args.length >= 2) {
-						if (plugin.getCfg().setSound(args[1].toUpperCase())) {
+						if (plugin.getSettings().setSound(args[1].toUpperCase())) {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Sound effect added");
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid sound: " + ChatColor.RED + args[1]);
@@ -98,7 +98,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 
 				} else if (args[0].equalsIgnoreCase("settrail")) {
 					if (args.length >= 2) {
-						if (plugin.getCfg().setParticle(args[1].toUpperCase())) {
+						if (plugin.getSettings().setParticle(args[1].toUpperCase())) {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect added");
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid particle effect: " + ChatColor.RED + args[1]);
@@ -110,7 +110,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("setBlock")) {
 					if (args.length >= 2) {
 						if (Material.getMaterial(args[1].toUpperCase()) != null) {
-							plugin.getCfg().setMaterial(args[1].toUpperCase());
+							plugin.getSettings().setMaterial(args[1].toUpperCase());
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Block material set to " + ChatColor.AQUA + args[1].toUpperCase());
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid block material: " + ChatColor.RED + args[1]);
@@ -130,8 +130,8 @@ public class LaunchPlateCommands implements CommandExecutor {
 							plateMaterial = args[1];
 						}
 						Material plate = Material.getMaterial(plateMaterial.toUpperCase());
-						if (Settings.isValid(plate)) {
-							plugin.getCfg().setPlate(plateMaterial.toUpperCase());
+						if (plugin.getSettings().isValid(plate)) {
+							plugin.getSettings().setPlate(plateMaterial.toUpperCase());
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Plate material set to " + ChatColor.AQUA + args[1].toUpperCase());
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid plate material: " + ChatColor.RED + args[1]);
@@ -142,8 +142,8 @@ public class LaunchPlateCommands implements CommandExecutor {
 						
 				} else if (args[0].equalsIgnoreCase("setForce")) {
 					if (args.length >= 2) {
-						if (Settings.isDouble(args[1])) {
-							plugin.getCfg().setForce(Double.valueOf(args[1]));
+						if (plugin.getSettings().isDouble(args[1])) {
+							plugin.getSettings().setForce(Double.valueOf(args[1]));
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Force set to " + ChatColor.AQUA + args[1]);
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid force: " + ChatColor.RED + args[1]);
@@ -161,7 +161,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 					if (args.length >= 1) {
 						if (args[0].equalsIgnoreCase("reload")) {
 							plugin.reloadConfig();
-							plugin.refreshSettings(new Settings());
+							plugin.refreshSettings();
 							plugin.getLogger().info("Config Reloaded");
 						} else {
 							plugin.getLogger().info("Invalid argument - only 'reload' is supported at this time");
