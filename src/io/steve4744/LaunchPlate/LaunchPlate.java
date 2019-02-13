@@ -51,6 +51,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	
 	private String version;
 	private Settings settings;
+	private SetupConfig cfg;
 	private static LaunchPlate instance;
 		
 	@Override
@@ -64,7 +65,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	    getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....enabled!").toString());
 
 	    settings = new Settings();
-	    new SetupConfig(this);
+	    cfg = new SetupConfig(this);
 
 	    getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
 	    getCommand("launchplate").setTabCompleter(new AutoTabCompleter());
@@ -195,10 +196,14 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	}
 
 	public Settings getSettings() {
-		return getInstance().settings;
+		return settings;
 	}
 	
 	public void refreshSettings(Settings settings) {
 		this.settings = settings;
+	}
+
+	public SetupConfig getCfg() {
+		return cfg;
 	}
 }

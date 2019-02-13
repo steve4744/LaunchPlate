@@ -30,13 +30,13 @@ import org.bukkit.Sound;
 
 public class SetupConfig {
 	
-	private static LaunchPlate plugin;
+	private LaunchPlate plugin;
 	
 	public SetupConfig(LaunchPlate pl) {
-		plugin = pl;
+		this.plugin = pl;
 	}
 	
-	public static boolean setSound(String soundEffect) {
+	public boolean setSound(String soundEffect) {
 		if (EnumUtils.isValidEnum(Sound.class, soundEffect)) {
 			plugin.getConfig().set("Sound", soundEffect);
 			plugin.saveConfig();
@@ -45,7 +45,7 @@ public class SetupConfig {
 		return false;
 	}
 	
-	public static boolean setParticle(String particleEffect) {
+	public boolean setParticle(String particleEffect) {
 		if (EnumUtils.isValidEnum(Particle.class, particleEffect)) {
 			plugin.getConfig().set("Trail", particleEffect);
 			plugin.saveConfig();
@@ -54,17 +54,17 @@ public class SetupConfig {
 		return false;
 	}
 	
-	public static void setMaterial(String material) {
+	public void setMaterial(String material) {
 		plugin.getConfig().set("Material", material);
 		plugin.saveConfig();
 	}
 	
-	public static void setPlate(String plate) {
+	public void setPlate(String plate) {
 		plugin.getConfig().set("Plate", plate);
 		plugin.saveConfig();
 	}
 	
-	public static void setForce(Double force) {
+	public void setForce(Double force) {
 		plugin.getConfig().set("Force", force);
 		plugin.saveConfig();
 	}

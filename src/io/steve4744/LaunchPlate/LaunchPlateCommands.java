@@ -87,7 +87,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 						
 				} else if (args[0].equalsIgnoreCase("setsound")) {
 					if (args.length >= 2) {
-						if (SetupConfig.setSound(args[1].toUpperCase())) {
+						if (plugin.getCfg().setSound(args[1].toUpperCase())) {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Sound effect added");
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid sound: " + ChatColor.RED + args[1]);
@@ -98,7 +98,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 
 				} else if (args[0].equalsIgnoreCase("settrail")) {
 					if (args.length >= 2) {
-						if (SetupConfig.setParticle(args[1].toUpperCase())) {
+						if (plugin.getCfg().setParticle(args[1].toUpperCase())) {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect added");
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid particle effect: " + ChatColor.RED + args[1]);
@@ -110,7 +110,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("setBlock")) {
 					if (args.length >= 2) {
 						if (Material.getMaterial(args[1].toUpperCase()) != null) {
-							SetupConfig.setMaterial(args[1].toUpperCase());
+							plugin.getCfg().setMaterial(args[1].toUpperCase());
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Block material set to " + ChatColor.AQUA + args[1].toUpperCase());
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid block material: " + ChatColor.RED + args[1]);
@@ -131,7 +131,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 						}
 						Material plate = Material.getMaterial(plateMaterial.toUpperCase());
 						if (Settings.isValid(plate)) {
-							SetupConfig.setPlate(plateMaterial.toUpperCase());
+							plugin.getCfg().setPlate(plateMaterial.toUpperCase());
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Plate material set to " + ChatColor.AQUA + args[1].toUpperCase());
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid plate material: " + ChatColor.RED + args[1]);
@@ -143,7 +143,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("setForce")) {
 					if (args.length >= 2) {
 						if (Settings.isDouble(args[1])) {
-							SetupConfig.setForce(Double.valueOf(args[1]));
+							plugin.getCfg().setForce(Double.valueOf(args[1]));
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Force set to " + ChatColor.AQUA + args[1]);
 						} else {
 							player.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid force: " + ChatColor.RED + args[1]);
