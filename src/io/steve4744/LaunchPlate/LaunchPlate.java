@@ -48,11 +48,11 @@ import io.steve4744.LaunchPlate.Settings;
 import io.steve4744.LaunchPlate.Metrics.Metrics;
 
 public class LaunchPlate extends JavaPlugin implements Listener {
-	
+
 	private String version;
 	private Settings settings;
 	private static LaunchPlate instance;
-		
+
 	@Override
 	public void onEnable() {
 
