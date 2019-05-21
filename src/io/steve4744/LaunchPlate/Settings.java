@@ -28,23 +28,22 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.lang3.EnumUtils;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
 
+import com.google.common.base.Enums;
+
 import io.steve4744.LaunchPlate.LaunchPlate;
 
 public class Settings {
-	
-	private Sound sound;
-	private Particle trail;
+
 	private final LaunchPlate plugin;
 	private FileConfiguration config;
-		
+
 	private final Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PRESSURE_PLATE, Material.OAK_PRESSURE_PLATE, Material.BIRCH_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE, Material.ACACIA_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE));
-	
+
 	public Settings(LaunchPlate plugin) {
 		this.plugin = plugin;
 		config = plugin.getConfig();
@@ -72,17 +71,11 @@ public class Settings {
 	}
 
 	public Sound getSound() {
-		if (EnumUtils.isValidEnum(Sound.class, config.getString("Sound"))) {
-			sound = Sound.valueOf(config.getString("Sound"));
-		}
-		return sound;
+		return config.getString("Sound") != null ? Enums.getIfPresent(Sound.class, config.getString("Sound")).orNull() : null;
 	}
 
 	public Particle getParticle() {
-		if (EnumUtils.isValidEnum(Particle.class, config.getString("Trail"))) {
-			trail = Particle.valueOf(config.getString("Trail"));
-		}
-		return trail;
+		return config.getString("Trail") != null ? Enums.getIfPresent(Particle.class, config.getString("Trail")).orNull() : null;
 	}
 
 	public boolean isValid(Material plate) {
@@ -98,7 +91,7 @@ public class Settings {
 	}
 
 	public boolean setSound(String soundEffect) {
-		if (EnumUtils.isValidEnum(Sound.class, soundEffect)) {
+		if (Enums.getIfPresent(Sound.class, soundEffect).orNull() != null) {
 			plugin.getConfig().set("Sound", soundEffect);
 			plugin.saveConfig();
 			return true;
@@ -107,7 +100,7 @@ public class Settings {
 	}
 
 	public boolean setParticle(String particleEffect) {
-		if (EnumUtils.isValidEnum(Particle.class, particleEffect)) {
+		if (Enums.getIfPresent(Particle.class, particleEffect).orNull() != null) {
 			plugin.getConfig().set("Trail", particleEffect);
 			plugin.saveConfig();
 			return true;

@@ -25,9 +25,9 @@ SOFTWARE.
 package io.steve4744.LaunchPlate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang3.EnumUtils;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -57,15 +57,13 @@ public class AutoTabCompleter implements TabCompleter {
 				list.add("setforce");
 				list.add("reload");
 			}
-
 		} else if (args.length == 2 && sender.hasPermission("launchplate.admin")) {
 			if (args[0].equalsIgnoreCase("setsound")) {
-				for (Sound sound : EnumUtils.getEnumList(Sound.class)) {
+				for (Sound sound : Arrays.asList(Sound.class.getEnumConstants())) {
 					list.add(String.valueOf(sound));
 				}
-
 			} else if (args[0].equalsIgnoreCase("settrail")) {
-				for (Particle particle : EnumUtils.getEnumList(Particle.class)) {
+				for (Particle particle : Arrays.asList(Particle.class.getEnumConstants())) {
 					list.add(String.valueOf(particle));
 				}
 			} else if (args[0].equalsIgnoreCase("setplate")) {
@@ -87,7 +85,6 @@ public class AutoTabCompleter implements TabCompleter {
 				auto.add(s);
 			}
 		}
-
 		return auto.isEmpty() ? list : auto;
 	}
 

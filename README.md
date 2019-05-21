@@ -51,5 +51,5 @@ All of the above require the "launchplate.admin" permission
 
 <br>
 <br>
-Updated 10 September 2018 by steve4744
+Updated 19 May 2019 by steve4744
 

@@ -51,20 +51,15 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 
 	private String version;
 	private Settings settings;
-	private static LaunchPlate instance;
 
 	@Override
 	public void onEnable() {
 
-		instance = this;
 		// Save a copy of the default config.yml if not exists
 		this.saveDefaultConfig();
 
 	    version = this.getDescription().getVersion();
-	    getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....enabled!").toString());
-
 	    settings = new Settings(this);
-
 	    getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
 	    getCommand("launchplate").setTabCompleter(new AutoTabCompleter());
 
@@ -72,7 +67,6 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		pm.registerEvents(this, this);
 
 		checkForUpdate();
-
 		new Metrics(this);
 	}
 
@@ -80,10 +74,6 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	public void onDisable() {
 		settings = null;
 		getLogger().info((new StringBuilder("LaunchPlate Version ")).append(version).append("....disabled!").toString());
-	}
-
-	public LaunchPlate getInstance() {
-		return instance;
 	}
 
 	private void setMD(Player player, String name, Object value) {
@@ -121,14 +111,12 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 								newForce = force - 2;
 								reLaunch = false;
 							}
-
 							// keep re-launching player until is newForce is < 4.0
 							player.setVelocity(new Vector(player.getVelocity().getX(), newForce, player.getVelocity().getZ()));
 							force = force - 2;	
 						}
 					}.runTaskTimer(this, 10L, 10L);
 				}
-
 			} else {
 				Vector velocity = player.getLocation().getDirection().normalize();
 				player.setVelocity(velocity.multiply((double)getSettings().getMagnitude()));
@@ -191,7 +179,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 					}
 				}
 			}
-		}.runTaskLaterAsynchronously(this, 40L);
+		}.runTaskLaterAsynchronously(this, 30L);
 	}
 
 	public Settings getSettings() {

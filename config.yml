@@ -21,16 +21,16 @@ Vertical_Bounce: true
 #  Rough guide: 1.0 = max 5 blocks high, 2.5 = max 28 blocks high, 4.0 = max 64 blocks high.
 Magnitude: 2.5
 #
-#  Add a launch sound (optional). Remove the '#' from one of the Sounds to activate. A list of available sounds 
-#  for MC 1.13.1 can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html.
+#  Add a launch sound (optional). Remove the '#' from one of the Sounds to activate or use command "/lp setsound " 
+#  with tab-completion. Available sounds can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html.
 #Sound: ENTITY_DRAGON_FIREBALL_EXPLODE
 #Sound: ENTITY_EVOKER_PREPARE_WOLOLO
 #Sound: ENTITY_FIREWORK_ROCKET_LAUNCH
 #
-#  Add a particle effect on launch (optional). Remove the '#' from one of the Trails to activate. A list of available
-#  particle effects for MC 1.13.1 can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html.
+#  Add a particle effect on launch (optional). Remove the '#' from one of the Trails to activate or use command "/lp settrail "
+#  with tab-completion. Available particle effects can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Particle.html.
 #Trail: SPELL_WITCH
-#Trail: SQUID_INK
+#Trail: CAMPFIRE_SIGNAL_SMOKE
 #Trail: REDSTONE
 #
 # Check for new version
