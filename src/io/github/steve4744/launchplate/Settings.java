@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.steve4744.LaunchPlate;
+package io.github.steve4744.launchplate;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -35,7 +35,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import com.google.common.base.Enums;
 
-import io.steve4744.LaunchPlate.LaunchPlate;
+import io.github.steve4744.launchplate.LaunchPlate;
 
 public class Settings {
 

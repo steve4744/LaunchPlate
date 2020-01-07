@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.steve4744.LaunchPlate;
+package io.github.steve4744.launchplate;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -44,8 +44,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import io.steve4744.LaunchPlate.Settings;
-import io.steve4744.LaunchPlate.Metrics.Metrics;
+import io.github.steve4744.launchplate.Settings;
+import io.github.steve4744.launchplate.metrics.Metrics;
 
 public class LaunchPlate extends JavaPlugin implements Listener {
 

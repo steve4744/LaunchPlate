@@ -1,4 +1,4 @@
-package io.steve4744.LaunchPlate.Metrics;
+package io.github.steve4744.launchplate.metrics;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  */
-package io.steve4744.LaunchPlate;
+package io.github.steve4744.launchplate;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
