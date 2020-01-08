@@ -13,13 +13,9 @@ Plate: HEAVY_WEIGHTED_PRESSURE_PLATE
 #  Height for vertical bounce. Rough Guide: 1.8 = 16 blocks, 4.0 = 60 blocks, 8.0 = 128 blocks.
 Force: 0.8
 #
-#  Vertical bounce only. If true, player is sent straight up, forward velocity is controlled by 'w' key.
+#  If true, player is sent straight up, forward velocity is controlled by 'w' key.
+#  If false, player is sent in a forward trajectory.
 Vertical_Bounce: true
-#
-#  Magnitude for trajectory if Vertical_Bounce is false. Height is also controlled by where you are looking.
-#  If you are looking down then you don't take off!
-#  Rough guide: 1.0 = max 5 blocks high, 2.5 = max 28 blocks high, 4.0 = max 64 blocks high.
-Magnitude: 2.5
 #
 #  Add a launch sound (optional). Remove the '#' from one of the Sounds to activate or use command "/lp setsound " 
 #  with tab-completion. Available sounds can be found here:  https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html.

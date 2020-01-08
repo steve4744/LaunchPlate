@@ -119,7 +119,8 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 				}
 			} else {
 				Vector velocity = player.getLocation().getDirection().normalize();
-				player.setVelocity(velocity.multiply((double)getSettings().getMagnitude()));
+				velocity.setY(1.0);
+				player.setVelocity(velocity.multiply(force));
 			}
 
 			if (getSettings().getSound() != null) {

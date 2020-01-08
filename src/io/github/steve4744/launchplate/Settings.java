@@ -66,10 +66,6 @@ public class Settings {
 		return config.getBoolean("Vertical_Bounce");
 	}
 
-	public double getMagnitude() {
-		return config.getDouble("Magnitude");
-	}
-
 	public Sound getSound() {
 		return config.getString("Sound") != null ? Enums.getIfPresent(Sound.class, config.getString("Sound")).orNull() : null;
 	}
