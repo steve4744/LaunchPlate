@@ -30,16 +30,19 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class LaunchPlateCommands implements CommandExecutor {
 
 	private final LaunchPlate plugin;
 	private final String version;
+	private FileConfiguration cfg;
 
 	public LaunchPlateCommands(LaunchPlate plugin, String version) {
 		this.plugin = plugin;
 		this.version = version;
+		cfg = plugin.getSettings().getStringData();
 	}
 
 	@Override
@@ -62,19 +65,19 @@ public class LaunchPlateCommands implements CommandExecutor {
 					return false;
 
 				} else if(args[0].equalsIgnoreCase("help")) {
-					String cmd = "/lp";
-					if (sender instanceof ConsoleCommandSender) {
-						cmd = "lp";
-					}
 					sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
-					sender.sendMessage(ChatColor.GREEN + cmd + " setblock" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- set the Material for the base block");
-					sender.sendMessage(ChatColor.GREEN + cmd + " setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- set the pressure plate Material");
-					sender.sendMessage(ChatColor.GREEN + cmd + " setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- set a launch sound effect");
-					sender.sendMessage(ChatColor.GREEN + cmd + " settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- set a launch particle effect");
-					sender.sendMessage(ChatColor.GREEN + cmd + " setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- force determines height of bounce");
-					sender.sendMessage(ChatColor.GREEN + cmd + " list " + ChatColor.WHITE + "- list the current LaunchPlate setttings");
-					sender.sendMessage(ChatColor.GREEN + cmd + " reload " + ChatColor.WHITE + "- reload the LaunchPlate config");
-					sender.sendMessage(ChatColor.GREEN + cmd + " help " + ChatColor.WHITE + "- display this command help screen");
+					if (sender instanceof Player) {
+						Utils.displayHelp((Player) sender);
+						return false;
+					}
+					sender.sendMessage(ChatColor.GREEN + "lpl setblock" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setblock"));
+					sender.sendMessage(ChatColor.GREEN + "lpl setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setplate"));
+					sender.sendMessage(ChatColor.GREEN + "lpl setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- " + cfg.getString("help.setsound"));
+					sender.sendMessage(ChatColor.GREEN + "lpl settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- " + cfg.getString("help.settrail"));
+					sender.sendMessage(ChatColor.GREEN + "lpl setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- " + cfg.getString("help.setforce"));
+					sender.sendMessage(ChatColor.GREEN + "lpl list " + ChatColor.WHITE + "- " + cfg.getString("help.list"));
+					sender.sendMessage(ChatColor.GREEN + "lpl reload " + ChatColor.WHITE + "- " + cfg.getString("help.reload"));
+					sender.sendMessage(ChatColor.GREEN + "lpl help " + ChatColor.WHITE + "- " + cfg.getString("help.help"));
 					return false;
 				}
 				if (!sender.hasPermission("launchplate.admin")) {
@@ -144,7 +147,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 
 				} else if (args[0].equalsIgnoreCase("setForce")) {
 					if (args.length >= 2) {
-						if (plugin.getSettings().isDouble(args[1])) {
+						if (Utils.isDouble(args[1])) {
 							plugin.getSettings().setForce(Double.valueOf(args[1]));
 							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Force set to " + ChatColor.AQUA + args[1]);
 						} else {

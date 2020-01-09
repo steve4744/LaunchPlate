@@ -37,13 +37,14 @@ public class VersionChecker {
 		try {
 			HttpURLConnection con = (HttpURLConnection) new URL("https://api.spigotmc.org/legacy/update.php?resource=42251").openConnection();
 			con.setDoOutput(true);
-			con.setRequestMethod("POST");
+			con.setRequestMethod("GET");
 			String version = new BufferedReader(new InputStreamReader(con.getInputStream())).readLine();
+			con.disconnect();
 			if (version.length() <= 7) {
 				return version;
 			}
 		} catch (Exception ex) {
-			Bukkit.getLogger().info("Failed to check for an update on Spigot.");
+			Bukkit.getLogger().info("[LaunchPlate] Failed to check for an update on Spigot.");
 		}
 		return "error";
 	}

@@ -51,6 +51,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 
 	private String version;
 	private Settings settings;
+	private static LaunchPlate instance;
 
 	@Override
 	public void onEnable() {
@@ -58,10 +59,11 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		// Save a copy of the default config.yml if not exists
 		this.saveDefaultConfig();
 
-	    version = this.getDescription().getVersion();
-	    settings = new Settings(this);
-	    getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
-	    getCommand("launchplate").setTabCompleter(new AutoTabCompleter());
+		instance = this;
+		version = this.getDescription().getVersion();
+		settings = new Settings(this);
+		getCommand("launchplate").setExecutor(new LaunchPlateCommands(this, version));
+		getCommand("launchplate").setTabCompleter(new AutoTabCompleter());
 
 		PluginManager pm = Bukkit.getPluginManager();
 		pm.registerEvents(this, this);
@@ -191,4 +193,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		this.settings = new Settings(this);
 	}
 
+	public static LaunchPlate getInstance() {
+		return instance;
+	}
 }

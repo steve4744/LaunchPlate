@@ -24,6 +24,7 @@ SOFTWARE.
  */
 package io.github.steve4744.launchplate;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +33,7 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.google.common.base.Enums;
 
@@ -43,10 +45,60 @@ public class Settings {
 	private FileConfiguration config;
 
 	private final Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PRESSURE_PLATE, Material.OAK_PRESSURE_PLATE, Material.BIRCH_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE, Material.ACACIA_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE));
+	private File dataFolder;
+	private File stringFile;
+	private YamlConfiguration stringData;
 
 	public Settings(LaunchPlate plugin) {
 		this.plugin = plugin;
 		config = plugin.getConfig();
+		dataFolder = plugin.getDataFolder();
+		stringFile = new File(dataFolder, "strings.yml");
+		stringData = new YamlConfiguration();
+
+		if (!stringFile.exists()) {
+			try {
+				stringFile.createNewFile();
+				plugin.getLogger().info("Created strings.yml");
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				plugin.getLogger().info("Failed!");
+			}
+		}
+		reloadStrings();
+		saveStrings();
+	}
+
+	public void reloadStrings() {
+		try {
+			stringData.load(stringFile);
+
+		} catch (Exception ex) {
+			plugin.getLogger().info("Failed loading config: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+
+	public FileConfiguration getStringData() {
+		return stringData;
+    }
+
+	public void saveStrings() {
+		try{
+			stringData.addDefault("help.setblock", "set the base block Material");
+			stringData.addDefault("help.setplate", "set the pressure plate Material");
+			stringData.addDefault("help.setsound", "set a launch sound effect");
+			stringData.addDefault("help.settrail", "set a launch particle effect");
+			stringData.addDefault("help.setforce", "numeric value to determine height");
+			stringData.addDefault("help.list", "list the current LaunchPlate setttings");
+			stringData.addDefault("help.reload", "reload the LaunchPlate config");
+			stringData.addDefault("help.help", "display this command help screen");
+			stringData.options().copyDefaults(true);
+			stringData.save(stringFile);
+			reloadStrings();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	public Material getLaunchBlock() {
@@ -76,14 +128,6 @@ public class Settings {
 
 	public boolean isValid(Material plate) {
 		return values.contains(plate);
-	}
-
-	public boolean isDouble(String text) {
-		try {
-			Double.parseDouble(text);
-			return true;
-		} catch (NumberFormatException e) {}
-		return false;
 	}
 
 	public boolean setSound(String soundEffect) {
