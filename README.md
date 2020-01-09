@@ -9,7 +9,7 @@ No fall damage is inflicted on the players, so LaunchPlate can be used in any ga
 LaunchPlate can be used as a fun addition to a lobby/hub or even as an extension to a parkour course.
 
 Starting with version 2.0 of LaunchPlate, the plugin will only run on Minecraft versions 1.13 and later.
-Version 1.7 of LaunchPlate is the final release to support all Minecraft versions from 1.8 through to 1.12.2.
+For older versions of Minecraft (1.8 through to 1.12.2), download version 1.7 of LaunchPlate from Spigot.
 
 ## Download
 
@@ -42,14 +42,16 @@ The plugin LuckPerms uses the same command alias "lp", so although tab completio
     /lp setsound - set a sound effect on launch
     /lp settrail - set a particle effect on launch
     /lp setforce - set force of bounce which determines the height achievable (default is 0.8)
+    /lp setvertical - if set to true (default), player will launch vertically
     /lp reload - reloads the config.yml file
 
 All of the above require the "launchplate.admin" permission
 
-    /lp help - displays this list of commands
+    /lp help - display this list of commands
+    /lp list - display the current settings
     /lp - information about the plugin
 
 <br>
 <br>
-Updated 19 May 2019 by steve4744
+Updated 09 January 2020 by steve4744
 
