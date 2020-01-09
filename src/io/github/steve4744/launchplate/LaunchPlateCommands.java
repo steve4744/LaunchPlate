@@ -47,122 +47,103 @@ public class LaunchPlateCommands implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-		if (command.getName().equalsIgnoreCase("launchplate")) {
-			if (sender instanceof Player || sender instanceof ConsoleCommandSender) {
+		if (sender instanceof Player || sender instanceof ConsoleCommandSender) {
 
-				if (args.length == 0 || args[0].equalsIgnoreCase("info")) {
-					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744");
-					return false;
+			if (args.length == 0 || args[0].equalsIgnoreCase("info")) {
+				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Version " + version + " : plugin by "+ ChatColor.AQUA + "steve4744");
+				return false;
 
-				} else if(args[0].equalsIgnoreCase("list")) {
-					sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
-					sender.sendMessage(ChatColor.GREEN + "Base block material : " + ChatColor.WHITE + plugin.getSettings().getLaunchBlock());
-					sender.sendMessage(ChatColor.GREEN + "Pressure plate type : " + ChatColor.WHITE + plugin.getSettings().getPlate());
-					sender.sendMessage(ChatColor.GREEN + "Launch sound effect : " + ChatColor.WHITE + plugin.getSettings().getSound());
-					sender.sendMessage(ChatColor.GREEN + "Launch particle effect : " + ChatColor.WHITE + plugin.getSettings().getParticle());
-					sender.sendMessage(ChatColor.GREEN + "Upward force applied : " + ChatColor.WHITE + plugin.getSettings().getForce());
-					sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
-					return false;
+			} else if(args[0].equalsIgnoreCase("list")) {
+				sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
+				sender.sendMessage(ChatColor.GREEN + "Base block material : " + ChatColor.WHITE + plugin.getSettings().getLaunchBlock());
+				sender.sendMessage(ChatColor.GREEN + "Pressure plate type : " + ChatColor.WHITE + plugin.getSettings().getPlate());
+				sender.sendMessage(ChatColor.GREEN + "Launch sound effect : " + ChatColor.WHITE + plugin.getSettings().getSound());
+				sender.sendMessage(ChatColor.GREEN + "Launch particle effect : " + ChatColor.WHITE + plugin.getSettings().getParticle());
+				sender.sendMessage(ChatColor.GREEN + "Upward force applied : " + ChatColor.WHITE + plugin.getSettings().getForce());
+				sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
+				return false;
 
-				} else if(args[0].equalsIgnoreCase("help")) {
-					sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
-					if (sender instanceof Player) {
-						Utils.displayHelp((Player) sender);
-						return false;
-					}
-					sender.sendMessage(ChatColor.GREEN + "lpl setblock" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setblock"));
-					sender.sendMessage(ChatColor.GREEN + "lpl setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setplate"));
-					sender.sendMessage(ChatColor.GREEN + "lpl setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- " + cfg.getString("help.setsound"));
-					sender.sendMessage(ChatColor.GREEN + "lpl settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- " + cfg.getString("help.settrail"));
-					sender.sendMessage(ChatColor.GREEN + "lpl setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- " + cfg.getString("help.setforce"));
-					sender.sendMessage(ChatColor.GREEN + "lpl list " + ChatColor.WHITE + "- " + cfg.getString("help.list"));
-					sender.sendMessage(ChatColor.GREEN + "lpl reload " + ChatColor.WHITE + "- " + cfg.getString("help.reload"));
-					sender.sendMessage(ChatColor.GREEN + "lpl help " + ChatColor.WHITE + "- " + cfg.getString("help.help"));
+			} else if(args[0].equalsIgnoreCase("help")) {
+				sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
+				if (sender instanceof Player) {
+					Utils.displayHelp((Player) sender);
 					return false;
 				}
-				if (!sender.hasPermission("launchplate.admin")) {
-					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Permission required to run commands: " + ChatColor.AQUA + "launchplate.admin");
-					return false;
-				}
+				sender.sendMessage(ChatColor.GREEN + "lpl setblock" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setblock"));
+				sender.sendMessage(ChatColor.GREEN + "lpl setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setplate"));
+				sender.sendMessage(ChatColor.GREEN + "lpl setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- " + cfg.getString("help.setsound"));
+				sender.sendMessage(ChatColor.GREEN + "lpl settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- " + cfg.getString("help.settrail"));
+				sender.sendMessage(ChatColor.GREEN + "lpl setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- " + cfg.getString("help.setforce"));
+				sender.sendMessage(ChatColor.GREEN + "lpl list " + ChatColor.WHITE + "- " + cfg.getString("help.list"));
+				sender.sendMessage(ChatColor.GREEN + "lpl reload " + ChatColor.WHITE + "- " + cfg.getString("help.reload"));
+				sender.sendMessage(ChatColor.GREEN + "lpl help " + ChatColor.WHITE + "- " + cfg.getString("help.help"));
+				return false;
+			}
+			if (!sender.hasPermission("launchplate.admin")) {
+				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Permission required to run command: " + ChatColor.AQUA + "launchplate.admin");
+				return false;
+			}
 
-				if (args[0].equalsIgnoreCase("reload")) {
-					plugin.reloadConfig(); 
-					plugin.refreshSettings();
-					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Config Reloaded");
+			if (args[0].equalsIgnoreCase("reload")) {
+				plugin.reloadConfig(); 
+				plugin.refreshSettings();
+				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Config Reloaded");
+				return false;
+			}
 
-				} else if (args[0].equalsIgnoreCase("setsound")) {
-					if (args.length >= 2) {
-						if (plugin.getSettings().setSound(args[1].toUpperCase())) {
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Sound effect added");
-						} else {
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid sound: " + ChatColor.RED + args[1]);
-						}
-					} else {
-						sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "No sound specified");
-					}
+			if (args.length < 2) {
+				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Missing argument - run " + ChatColor.GREEN + "/lp/ help " + ChatColor.WHITE + "for usage");
+				return false;
+			}
 
-				} else if (args[0].equalsIgnoreCase("settrail")) {
-					if (args.length >= 2) {
-						if (plugin.getSettings().setParticle(args[1].toUpperCase())) {
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect added");
-						} else {
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid particle effect: " + ChatColor.RED + args[1]);
-						}
-					} else {
-						sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "No particle effect specified");
-					}
-
-				} else if (args[0].equalsIgnoreCase("setBlock")) {
-					if (args.length >= 2) {
-						if (Material.getMaterial(args[1].toUpperCase()) != null) {
-							plugin.getSettings().setMaterial(args[1].toUpperCase());
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Block material set to " + ChatColor.AQUA + args[1].toUpperCase());
-						} else {
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid block material: " + ChatColor.RED + args[1]);
-						}
-					} else {
-						sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "No block material specified");
-					}	
-
-				} else if (args[0].equalsIgnoreCase("setPlate")) {
-					if (args.length >= 2) {
-						String plateMaterial;
-						if (args[1].equalsIgnoreCase("GOLD_PLATE") || args[1].equalsIgnoreCase("GOLD_PRESSURE_PLATE")) {
-							plateMaterial = "LIGHT_WEIGHTED_PRESSURE_PLATE";
-						} else if (args[1].equalsIgnoreCase("IRON_PLATE") || args[1].equalsIgnoreCase("IRON_PRESSURE_PLATE")) {
-							plateMaterial = "HEAVY_WEIGHTED_PRESSURE_PLATE";
-						} else {
-							plateMaterial = args[1];
-						}
-						Material plate = Material.getMaterial(plateMaterial.toUpperCase());
-						if (plugin.getSettings().isValid(plate)) {
-							plugin.getSettings().setPlate(plateMaterial.toUpperCase());
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Plate material set to " + ChatColor.AQUA + args[1].toUpperCase());
-						} else {
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid plate material: " + ChatColor.RED + args[1]);
-						}
-					} else {
-						sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "No plate material specified");
-					}	
-
-				} else if (args[0].equalsIgnoreCase("setForce")) {
-					if (args.length >= 2) {
-						if (Utils.isDouble(args[1])) {
-							plugin.getSettings().setForce(Double.valueOf(args[1]));
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Force set to " + ChatColor.AQUA + args[1]);
-						} else {
-							sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid force: " + ChatColor.RED + args[1]);
-						}
-					} else {
-						sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "No value specified for force");
-					}	
-
+			if (args[0].equalsIgnoreCase("setsound")) {
+				if (plugin.getSettings().setSound(args[1].toUpperCase())) {
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Sound effect added");
 				} else {
-					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid argument - run " + ChatColor.GREEN + "/lp help " + ChatColor.WHITE + "for more information");
-				} 
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid sound: " + ChatColor.RED + args[1]);
+				}
 
+			} else if (args[0].equalsIgnoreCase("settrail")) {
+				if (plugin.getSettings().setParticle(args[1].toUpperCase())) {
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect added");
+				} else {
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid particle effect: " + ChatColor.RED + args[1]);
+				}
+
+			} else if (args[0].equalsIgnoreCase("setBlock")) {
+				if (Material.getMaterial(args[1].toUpperCase()) != null) {
+					plugin.getSettings().setMaterial(args[1].toUpperCase());
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Block material set to " + ChatColor.AQUA + args[1].toUpperCase());
+				} else {
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid block material: " + ChatColor.RED + args[1]);
+				}	
+
+			} else if (args[0].equalsIgnoreCase("setPlate")) {
+				String plateMaterial;
+				if (args[1].equalsIgnoreCase("GOLD_PLATE") || args[1].equalsIgnoreCase("GOLD_PRESSURE_PLATE")) {
+					plateMaterial = "LIGHT_WEIGHTED_PRESSURE_PLATE";
+				} else if (args[1].equalsIgnoreCase("IRON_PLATE") || args[1].equalsIgnoreCase("IRON_PRESSURE_PLATE")) {
+					plateMaterial = "HEAVY_WEIGHTED_PRESSURE_PLATE";
+				} else {
+					plateMaterial = args[1];
+				}
+				Material plate = Material.getMaterial(plateMaterial.toUpperCase());
+				if (plugin.getSettings().isValid(plate)) {
+					plugin.getSettings().setPlate(plateMaterial.toUpperCase());
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Plate material set to " + ChatColor.AQUA + args[1].toUpperCase());
+				} else {
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid plate material: " + ChatColor.RED + args[1]);
+				}	
+
+			} else if (args[0].equalsIgnoreCase("setForce")) {
+				if (Utils.isDouble(args[1])) {
+					plugin.getSettings().setForce(Double.valueOf(args[1]));
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Force set to " + ChatColor.AQUA + args[1]);
+				} else {
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid force: " + ChatColor.RED + args[1]);
+				}
 			} else {
-				plugin.getLogger().info("Version " + version + " : plugin by steve4744");
+				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid argument - run " + ChatColor.GREEN + "/lpl help " + ChatColor.WHITE + "for usage");
 			}
 		}
 		return false;
