@@ -90,6 +90,7 @@ public class Settings {
 			stringData.addDefault("help.setsound", "set a launch sound effect");
 			stringData.addDefault("help.settrail", "set a launch particle effect");
 			stringData.addDefault("help.setforce", "numeric value to determine height");
+			stringData.addDefault("help.setvertical", "set vertical launch");
 			stringData.addDefault("help.list", "list the current LaunchPlate setttings");
 			stringData.addDefault("help.reload", "reload the LaunchPlate config");
 			stringData.addDefault("help.help", "display this command help screen");
@@ -160,6 +161,11 @@ public class Settings {
 
 	public void setForce(Double force) {
 		plugin.getConfig().set("Force", force);
+		plugin.saveConfig();
+	}
+
+	public void setVertical(String vertical) {
+		plugin.getConfig().set("Vertical_Bounce", Boolean.valueOf(vertical));
 		plugin.saveConfig();
 	}
 

@@ -55,17 +55,21 @@ public class AutoTabCompleter implements TabCompleter {
 				list.add("settrail");
 				list.add("setsound");
 				list.add("setforce");
+				list.add("setvertical");
 				list.add("reload");
 			}
+
 		} else if (args.length == 2 && sender.hasPermission("launchplate.admin")) {
 			if (args[0].equalsIgnoreCase("setsound")) {
 				for (Sound sound : Arrays.asList(Sound.class.getEnumConstants())) {
 					list.add(String.valueOf(sound));
 				}
+
 			} else if (args[0].equalsIgnoreCase("settrail")) {
 				for (Particle particle : Arrays.asList(Particle.class.getEnumConstants())) {
 					list.add(String.valueOf(particle));
 				}
+
 			} else if (args[0].equalsIgnoreCase("setplate")) {
 				list.add("iron_plate");
 				list.add("gold_plate");
@@ -78,6 +82,10 @@ public class AutoTabCompleter implements TabCompleter {
 				list.add("stone_pressure_plate");
 				list.add("light_weighted_pressure_plate");
 				list.add("heavy_weighted_pressure_plate");
+
+			} else if (args[0].equalsIgnoreCase("setvertical")) {
+				list.add("true");
+				list.add("false");
 			}
 		}
 		for (String s : list) {

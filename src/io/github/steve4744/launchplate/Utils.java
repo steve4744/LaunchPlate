@@ -52,6 +52,7 @@ public class Utils {
 		player.spigot().sendMessage(getTextComponent("/lpl setsound [sound]", true), getTextComponent(cfg.getString("help.setsound")));
 		player.spigot().sendMessage(getTextComponent("/lpl settrail [particle]", true), getTextComponent(cfg.getString("help.settrail")));
 		player.spigot().sendMessage(getTextComponent("/lpl setforce [force]", true), getTextComponent(cfg.getString("help.setforce")));
+		player.spigot().sendMessage(getTextComponent("/lpl setvertical [true | false]", true), getTextComponent(cfg.getString("help.setvertical")));
 		player.spigot().sendMessage(getTextComponent("/lpl list", true), getTextComponent(cfg.getString("help.list")));
 		player.spigot().sendMessage(getTextComponent("/lpl reload", true), getTextComponent(cfg.getString("help.reload")));
 		player.spigot().sendMessage(getTextComponent("/lpl help", true), getTextComponent(cfg.getString("help.help")));

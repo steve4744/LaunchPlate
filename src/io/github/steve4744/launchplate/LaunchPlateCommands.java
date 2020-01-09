@@ -59,7 +59,8 @@ public class LaunchPlateCommands implements CommandExecutor {
 				sender.sendMessage(ChatColor.GREEN + "Pressure plate type : " + ChatColor.WHITE + plugin.getSettings().getPlate());
 				sender.sendMessage(ChatColor.GREEN + "Launch sound effect : " + ChatColor.WHITE + plugin.getSettings().getSound());
 				sender.sendMessage(ChatColor.GREEN + "Launch particle effect : " + ChatColor.WHITE + plugin.getSettings().getParticle());
-				sender.sendMessage(ChatColor.GREEN + "Upward force applied : " + ChatColor.WHITE + plugin.getSettings().getForce());
+				sender.sendMessage(ChatColor.GREEN + "Force applied : " + ChatColor.WHITE + plugin.getSettings().getForce());
+				sender.sendMessage(ChatColor.GREEN + "Vertical launch : " + ChatColor.WHITE + String.valueOf(plugin.getSettings().isVertical()));
 				sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
 				return false;
 
@@ -74,6 +75,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				sender.sendMessage(ChatColor.GREEN + "lpl setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- " + cfg.getString("help.setsound"));
 				sender.sendMessage(ChatColor.GREEN + "lpl settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- " + cfg.getString("help.settrail"));
 				sender.sendMessage(ChatColor.GREEN + "lpl setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- " + cfg.getString("help.setforce"));
+				sender.sendMessage(ChatColor.GREEN + "lpl setvertical" + ChatColor.YELLOW + " (True|False) " + ChatColor.WHITE + "- " + cfg.getString("help.setvertical"));
 				sender.sendMessage(ChatColor.GREEN + "lpl list " + ChatColor.WHITE + "- " + cfg.getString("help.list"));
 				sender.sendMessage(ChatColor.GREEN + "lpl reload " + ChatColor.WHITE + "- " + cfg.getString("help.reload"));
 				sender.sendMessage(ChatColor.GREEN + "lpl help " + ChatColor.WHITE + "- " + cfg.getString("help.help"));
@@ -92,7 +94,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 			}
 
 			if (args.length < 2) {
-				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Missing argument - run " + ChatColor.GREEN + "/lp/ help " + ChatColor.WHITE + "for usage");
+				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Missing argument - run " + ChatColor.GREEN + "/lpl help " + ChatColor.WHITE + "for usage");
 				return false;
 			}
 
@@ -142,6 +144,15 @@ public class LaunchPlateCommands implements CommandExecutor {
 				} else {
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid force: " + ChatColor.RED + args[1]);
 				}
+
+			} else if (args[0].equalsIgnoreCase("setVertical")) {
+				if (args[1].equalsIgnoreCase("true") || args[1].equalsIgnoreCase("false")) {
+					plugin.getSettings().setVertical(args[1]);
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Vertical launch set to " + ChatColor.AQUA + args[1]);
+				} else {
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid option: " + ChatColor.RED + args[1]);
+				}
+
 			} else {
 				sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid argument - run " + ChatColor.GREEN + "/lpl help " + ChatColor.WHITE + "for usage");
 			}
