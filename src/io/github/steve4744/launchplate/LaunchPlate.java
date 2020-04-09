@@ -95,7 +95,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		if (block.getRelative(BlockFace.DOWN).getType() == getSettings().getLaunchBlock() && block.getType() == getSettings().getPlate()) {
 			if (getSettings().isVertical()) {
 				// launch the player - force applied will be 4.0 max
-				player.setVelocity(new Vector(player.getVelocity().getX(), player.getVelocity().getY() + force, player.getVelocity().getZ()));
+				player.setVelocity(new Vector(player.getVelocity().getX(), force, player.getVelocity().getZ()));
 
 				// if the force is > max allowed, then re-launch player after 10 ticks
 				if (force > 4.0) {
