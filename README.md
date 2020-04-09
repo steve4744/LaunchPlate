@@ -2,7 +2,7 @@
 
 A launch plate is created by placing a pressure plate on top of any other block. When a player steps on the plate, he/she will be launched upwards to any configurable height. The type of block and type of pressure plate are both configurable in the config.yml and can be set using commands. The default block is obsidian with a gold pressure plate placed on top.
 
-The height to which the player is launched is controlled by the "force" variable in the configuration file, set with the "/lp setforce" command. The actual height achieved can be controlled to a  good degree of accuracy by specifying the force as a decimal. The default force is 0.8 which will launch the player about 16 blocks up.  Unlike a lot of similar plugins, there is no limit to the height a player can be launched to. So, for example, a force of 4.0 will launch the player about 60 blocks up, while a force of 8.0 will launch the player about 128 blocks up.
+The height to which the player is launched is controlled by the "force" variable in the configuration file, set with the "/lp setforce" command. The actual height achieved can be controlled to a  good degree of accuracy by specifying the force as a decimal. The default force is 0.8 which will launch the player about 4 blocks up, while a force of 1.8 will launch the player about 16 blocks up. Unlike a lot of similar plugins, there is no limit to the height a player can be launched to. So, for example, a force of 4.0 will launch the player about 60 blocks up, while a force of 8.0 will launch the player about 128 blocks up.
 
 No fall damage is inflicted on the players, so LaunchPlate can be used in any gamemode.
 
@@ -53,5 +53,5 @@ All of the above require the "launchplate.admin" permission
 
 <br>
 <br>
-Updated 09 January 2020 by steve4744
+Updated 10 April 2020 by steve4744
 
