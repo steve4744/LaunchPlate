@@ -25,9 +25,6 @@ SOFTWARE.
 package io.github.steve4744.launchplate;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -43,8 +40,6 @@ public class Settings {
 
 	private final LaunchPlate plugin;
 	private FileConfiguration config;
-
-	private final Set<Material> values = new HashSet<Material>(Arrays.asList(Material.STONE_PRESSURE_PLATE, Material.OAK_PRESSURE_PLATE, Material.BIRCH_PRESSURE_PLATE, Material.SPRUCE_PRESSURE_PLATE, Material.JUNGLE_PRESSURE_PLATE, Material.DARK_OAK_PRESSURE_PLATE, Material.ACACIA_PRESSURE_PLATE, Material.HEAVY_WEIGHTED_PRESSURE_PLATE, Material.LIGHT_WEIGHTED_PRESSURE_PLATE));
 	private File dataFolder;
 	private File stringFile;
 	private YamlConfiguration stringData;
@@ -128,7 +123,7 @@ public class Settings {
 	}
 
 	public boolean isValid(Material plate) {
-		return values.contains(plate);
+		return Enums.getIfPresent(PressurePlates.class, plate.toString()).orNull() != null;
 	}
 
 	public boolean setSound(String soundEffect) {

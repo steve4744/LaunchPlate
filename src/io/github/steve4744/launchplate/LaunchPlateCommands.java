@@ -130,7 +130,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 					plateMaterial = args[1];
 				}
 				Material plate = Material.getMaterial(plateMaterial.toUpperCase());
-				if (plugin.getSettings().isValid(plate)) {
+				if (plate != null && plugin.getSettings().isValid(plate)) {
 					plugin.getSettings().setPlate(plateMaterial.toUpperCase());
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Plate material set to " + ChatColor.AQUA + args[1].toUpperCase());
 				} else {

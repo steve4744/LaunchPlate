@@ -71,17 +71,8 @@ public class AutoTabCompleter implements TabCompleter {
 				}
 
 			} else if (args[0].equalsIgnoreCase("setplate")) {
-				list.add("iron_plate");
-				list.add("gold_plate");
-				list.add("oak_pressure_plate");
-				list.add("dark_oak_pressure_plate");
-				list.add("birch_pressure_plate");
-				list.add("jungle_pressure_plate");
-				list.add("spruce_pressure_plate");
-				list.add("acacia_pressure_plate");
-				list.add("stone_pressure_plate");
-				list.add("light_weighted_pressure_plate");
-				list.add("heavy_weighted_pressure_plate");
+				Arrays.asList(PressurePlates.values())
+					.forEach(plate -> list.add(String.valueOf(plate)));
 
 			} else if (args[0].equalsIgnoreCase("setvertical")) {
 				list.add("true");
