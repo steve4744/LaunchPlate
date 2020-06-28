@@ -69,7 +69,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		pm.registerEvents(this, this);
 
 		checkForUpdate();
-		new Metrics(this);
+		new Metrics(this, 2145);
 	}
 
 	@Override
