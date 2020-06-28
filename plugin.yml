@@ -2,7 +2,7 @@ name: LaunchPlate
 main: io.github.steve4744.launchplate.LaunchPlate
 author: steve4744
 version: 2.6
-api-version: 1.13
+api-version: 1.16
 description: Launches player when steps on special pressure plate.
 commands:
   launchplate:

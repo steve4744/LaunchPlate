@@ -29,6 +29,7 @@ import java.io.File;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.Tag;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -123,7 +124,7 @@ public class Settings {
 	}
 
 	public boolean isValid(Material plate) {
-		return Enums.getIfPresent(PressurePlates.class, plate.toString()).orNull() != null;
+		return Tag.PRESSURE_PLATES.isTagged(plate);
 	}
 
 	public boolean setSound(String soundEffect) {

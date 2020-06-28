@@ -8,7 +8,8 @@ No fall damage is inflicted on the players, so LaunchPlate can be used in any ga
 
 LaunchPlate can be used as a fun addition to a lobby/hub or even as an extension to a parkour course.
 
-Starting with version 2.0 of LaunchPlate, the plugin will run on all Minecraft versions from 1.13 onwards.
+The latest version of LaunchPlate is for Minecraft 1.16+.
+Version 2.5 of LaunchPlate will run on all Minecraft versions from 1.13 to 1.15.2.
 For older versions of Minecraft (1.8 through to 1.12.2), download version 1.7 of LaunchPlate from Spigot.
 
 ## Download

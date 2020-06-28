@@ -28,8 +28,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.Tag;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
@@ -71,8 +73,9 @@ public class AutoTabCompleter implements TabCompleter {
 				}
 
 			} else if (args[0].equalsIgnoreCase("setplate")) {
-				Arrays.asList(PressurePlates.values())
-					.forEach(plate -> list.add(String.valueOf(plate)));
+				for (Material plate : Tag.PRESSURE_PLATES.getValues()) {
+					list.add(plate.toString());
+				}
 
 			} else if (args[0].equalsIgnoreCase("setvertical")) {
 				list.add("true");
