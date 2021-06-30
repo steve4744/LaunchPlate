@@ -35,8 +35,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.google.common.base.Enums;
 
-import io.github.steve4744.launchplate.LaunchPlate;
-
 public class Settings {
 
 	private final LaunchPlate plugin;

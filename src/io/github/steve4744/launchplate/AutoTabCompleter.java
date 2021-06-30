@@ -39,6 +39,11 @@ import org.bukkit.entity.Player;
 
 public class AutoTabCompleter implements TabCompleter {
 
+	private static final List<String> COMMANDS = Arrays.asList("help", "list");
+
+	private static final List<String> ADMIN_COMMANDS = Arrays.asList(
+			"setblock", "setplate", "settrail", "setsound", "setforce", "setvertical", "reload");
+
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String alias, String[] args) {
 		if (!(sender instanceof Player)) {
@@ -49,16 +54,9 @@ public class AutoTabCompleter implements TabCompleter {
 		List<String> auto = new ArrayList<String>();
 
 		if (args.length == 1) {
-			list.add("help");
-			list.add("list");
+			list.addAll(COMMANDS);
 			if (sender.hasPermission("launchplate.admin")) {
-				list.add("setblock");
-				list.add("setplate");
-				list.add("settrail");
-				list.add("setsound");
-				list.add("setforce");
-				list.add("setvertical");
-				list.add("reload");
+				list.addAll(ADMIN_COMMANDS);
 			}
 
 		} else if (args.length == 2 && sender.hasPermission("launchplate.admin")) {
