@@ -44,7 +44,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import io.github.steve4744.launchplate.Settings;
 import io.github.steve4744.launchplate.metrics.Metrics;
 
 public class LaunchPlate extends JavaPlugin implements Listener {
@@ -52,6 +51,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	private String version;
 	private Settings settings;
 	private static LaunchPlate instance;
+	private static final int BSTATS_PLUGIN_ID = 2145;
 
 	@Override
 	public void onEnable() {
@@ -69,7 +69,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		pm.registerEvents(this, this);
 
 		checkForUpdate();
-		new Metrics(this, 2145);
+		new Metrics(this, BSTATS_PLUGIN_ID);
 	}
 
 	@Override
