@@ -100,14 +100,14 @@ public class LaunchPlateCommands implements CommandExecutor {
 
 			if (args[0].equalsIgnoreCase("setsound")) {
 				if (plugin.getSettings().setSound(args[1].toUpperCase())) {
-					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Sound effect added");
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Sound effect " + ChatColor.AQUA + args[1] + ChatColor.WHITE + " added");
 				} else {
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid sound: " + ChatColor.RED + args[1]);
 				}
 
 			} else if (args[0].equalsIgnoreCase("settrail")) {
 				if (plugin.getSettings().setParticle(args[1].toUpperCase())) {
-					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect added");
+					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect " + ChatColor.AQUA + args[1] + ChatColor.WHITE + " added");
 				} else {
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid particle effect: " + ChatColor.RED + args[1]);
 				}

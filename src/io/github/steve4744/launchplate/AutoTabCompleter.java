@@ -63,11 +63,13 @@ public class AutoTabCompleter implements TabCompleter {
 			if (args[0].equalsIgnoreCase("setsound")) {
 				for (Sound sound : Arrays.asList(Sound.class.getEnumConstants())) {
 					list.add(String.valueOf(sound));
+					list.add("none");
 				}
 
 			} else if (args[0].equalsIgnoreCase("settrail")) {
 				for (Particle particle : Arrays.asList(Particle.class.getEnumConstants())) {
 					list.add(String.valueOf(particle));
+					list.add("none");
 				}
 
 			} else if (args[0].equalsIgnoreCase("setplate")) {

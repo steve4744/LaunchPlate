@@ -126,7 +126,7 @@ public class Settings {
 	}
 
 	public boolean setSound(String soundEffect) {
-		if (Enums.getIfPresent(Sound.class, soundEffect).orNull() != null) {
+		if (Enums.getIfPresent(Sound.class, soundEffect).orNull() != null || soundEffect.equalsIgnoreCase("none")) {
 			plugin.getConfig().set("Sound", soundEffect);
 			plugin.saveConfig();
 			return true;
@@ -135,7 +135,7 @@ public class Settings {
 	}
 
 	public boolean setParticle(String particleEffect) {
-		if (Enums.getIfPresent(Particle.class, particleEffect).orNull() != null) {
+		if (Enums.getIfPresent(Particle.class, particleEffect).orNull() != null || particleEffect.equalsIgnoreCase("none")) {
 			plugin.getConfig().set("Trail", particleEffect);
 			plugin.saveConfig();
 			return true;
