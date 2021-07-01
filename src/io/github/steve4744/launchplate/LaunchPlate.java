@@ -137,15 +137,25 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 				}
 			}.runTask(this);
 
-			if (getSettings().getParticle() != null) {
-				Particle p = getSettings().getParticle();
-				Location loc = player.getLocation().add(0, 0.5, 0);
-				DustOptions data = null;
-				if (p.getDataType() == Particle.DustOptions.class) {
-					data = new Particle.DustOptions(Color.RED, 1.5F);
-				}
-				player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50, data);
+			Particle p = getSettings().getParticle();
+			if (p == null) {
+				return;
 			}
+
+			Location loc = player.getLocation().add(0, 0.5, 0);
+			DustOptions data = null;
+
+			if (p.getDataType() == Particle.DustOptions.class) {
+				data = new Particle.DustOptions(Color.RED, 1.5F);
+
+			} else if (p.getDataType() == Particle.DustTransition.class) {
+				data = new Particle.DustTransition(Color.YELLOW, Color.GREEN, 1.5F);
+
+			} else if (p.getDataType() != Void.class) {
+				return;
+			}
+
+			player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50, data);
 		}
 	}
 
