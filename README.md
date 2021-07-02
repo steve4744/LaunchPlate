@@ -2,17 +2,22 @@
 
 A launch plate is created by placing a pressure plate on top of any other block. When a player steps on the plate, he/she will be launched upwards to any configurable height. The type of block and type of pressure plate are both configurable in the config.yml and can be set using commands. The default block is obsidian with a gold pressure plate placed on top.
 
-The height to which the player is launched is controlled by the "force" variable in the configuration file, set with the "/lp setforce" command. The actual height achieved can be controlled to a  good degree of accuracy by specifying the force as a decimal. The default force is 0.8 which will launch the player about 4 blocks up, while a force of 1.8 will launch the player about 16 blocks up. Unlike a lot of similar plugins, there is no limit to the height a player can be launched to. So, for example, a force of 4.0 will launch the player about 60 blocks up, while a force of 8.0 will launch the player about 128 blocks up.
+The height to which the player is launched is controlled by the "force" variable in the configuration file, set with the "/lpl setforce" command. The actual height achieved can be controlled to a  good degree of accuracy by specifying the force as a decimal. The default force is 0.8 which will launch the player about 4 blocks up, while a force of 1.8 will launch the player about 16 blocks up. Unlike a lot of similar plugins, there is no limit to the height a player can be launched to. So, for example, a force of 4.0 will launch the player about 60 blocks up, while a force of 8.0 will launch the player about 128 blocks up.
 
 No fall damage is inflicted on the players, so LaunchPlate can be used in any gamemode.
 
 LaunchPlate can be used as a fun addition to a lobby/hub or even as an extension to a parkour course.
 
 ## Versions
-The latest version of LaunchPlate is for Minecraft 1.16+.
+The latest version of LaunchPlate requires Java 16 and is for Minecraft 1.17+.
 
-Version 2.5 of LaunchPlate will run on all Minecraft versions from 1.13 to 1.15.2.<br>
-For older versions of Minecraft (1.8 through to 1.12.2), download version 1.7 of LaunchPlate from Spigot.
+Version 3.0 of Launchplate is supported on Minecraft 1.16.5.
+
+The versions below are available for download but are no longer supported:
+
+Version 2.5 will run on all Minecraft versions from 1.13 to 1.15.2.<br>
+Version 1.8 is for Minecraft 1.9 to 1.12.2 can be [downloaded from GitHub](https://github.com/steve4744/LaunchPlate/releases/download/v1.8/LaunchPlate.jar "LaunchPlate v1.8 by steve4744")<br>
+Version 1.7 is for Minecraft 1.8 can be downloaded from Spigot.
 
 ## Download
 
@@ -56,5 +61,5 @@ All of the above require the "launchplate.admin" permission
 
 <br>
 <br>
-Updated 28 June 2020 by steve4744
+Updated 02 July 2021 by steve4744
 
