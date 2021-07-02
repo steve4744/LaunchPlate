@@ -73,7 +73,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				sender.sendMessage(ChatColor.GREEN + "lpl setblock" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setblock"));
 				sender.sendMessage(ChatColor.GREEN + "lpl setplate" + ChatColor.YELLOW + " (Material) " + ChatColor.WHITE + "- " + cfg.getString("help.setplate"));
 				sender.sendMessage(ChatColor.GREEN + "lpl setsound" + ChatColor.YELLOW + " (Sound) " + ChatColor.WHITE + "- " + cfg.getString("help.setsound"));
-				sender.sendMessage(ChatColor.GREEN + "lpl settrail" + ChatColor.YELLOW + " (Particle) " + ChatColor.WHITE + "- " + cfg.getString("help.settrail"));
+				sender.sendMessage(ChatColor.GREEN + "lpl settrail" + ChatColor.YELLOW + " (Particle) [colour] " + ChatColor.WHITE + "- " + cfg.getString("help.settrail"));
 				sender.sendMessage(ChatColor.GREEN + "lpl setforce" + ChatColor.YELLOW + " (Force) " + ChatColor.WHITE + "- " + cfg.getString("help.setforce"));
 				sender.sendMessage(ChatColor.GREEN + "lpl setvertical" + ChatColor.YELLOW + " (True|False) " + ChatColor.WHITE + "- " + cfg.getString("help.setvertical"));
 				sender.sendMessage(ChatColor.GREEN + "lpl list " + ChatColor.WHITE + "- " + cfg.getString("help.list"));
@@ -108,6 +108,12 @@ public class LaunchPlateCommands implements CommandExecutor {
 			} else if (args[0].equalsIgnoreCase("settrail")) {
 				if (plugin.getSettings().setParticle(args[1].toUpperCase())) {
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect " + ChatColor.AQUA + args[1] + ChatColor.WHITE + " added");
+					if (args.length > 2 && args[2] != null) {
+						plugin.getSettings().setParticleColour(args[2], "Start");
+					}
+					if (args.length > 3 && args[3] != null) {
+						plugin.getSettings().setParticleColour(args[3], "End");
+					}
 				} else {
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Invalid particle effect: " + ChatColor.RED + args[1]);
 				}

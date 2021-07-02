@@ -81,7 +81,17 @@ public class AutoTabCompleter implements TabCompleter {
 				list.add("true");
 				list.add("false");
 			}
+
+		} else if (args.length == 3 && sender.hasPermission("launchplate.admin")) {
+			if (args[0].equalsIgnoreCase("settrail") && (args[1].equalsIgnoreCase("REDSTONE") || args[1].equalsIgnoreCase("DUST_COLOR_TRANSITION"))) {
+				list.addAll(LaunchPlate.getInstance().getSettings().getColours().keySet());
+			}
+		} else if (args.length == 4 && sender.hasPermission("launchplate.admin")) {
+			if (args[0].equalsIgnoreCase("settrail") && args[1].equalsIgnoreCase("DUST_COLOR_TRANSITION")) {
+				list.addAll(LaunchPlate.getInstance().getSettings().getColours().keySet());
+			}
 		}
+
 		for (String s : list) {
 			if (s.startsWith(args[args.length - 1])) {
 				auto.add(s);

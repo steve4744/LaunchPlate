@@ -25,7 +25,6 @@ SOFTWARE.
 package io.github.steve4744.launchplate;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Particle.DustOptions;
@@ -90,73 +89,73 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 			return;
 
 		Block block = m.getTo().getBlock();
-		double force = getSettings().getForce();
-
-		if (block.getRelative(BlockFace.DOWN).getType() == getSettings().getLaunchBlock() && block.getType() == getSettings().getPlate()) {
-			if (getSettings().isVertical()) {
-				// launch the player - force applied will be 4.0 max
-				player.setVelocity(new Vector(player.getVelocity().getX(), force, player.getVelocity().getZ()));
-
-				// if the force is > max allowed, then re-launch player after 10 ticks
-				if (force > 4.0) {
-					new BukkitRunnable() {
-						boolean reLaunch = true;
-						double force = getSettings().getForce();
-						double newForce = 4.0;  // max force
-						@Override
-						public void run() {
-							if (!reLaunch || !player.isOnline()) {
-								this.cancel();
-								return;
-							}
-							if (force <= 6.0 ) {
-								newForce = force - 2;
-								reLaunch = false;
-							}
-							// keep re-launching player until is newForce is < 4.0
-							player.setVelocity(new Vector(player.getVelocity().getX(), newForce, player.getVelocity().getZ()));
-							force = force - 2;	
-						}
-					}.runTaskTimer(this, 10L, 10L);
-				}
-			} else {
-				Vector velocity = player.getLocation().getDirection().normalize();
-				velocity.setY(1.0);
-				player.setVelocity(velocity.multiply(force));
-			}
-
-			if (getSettings().getSound() != null) {
-				player.getWorld().playSound(player.getLocation(), getSettings().getSound(), 5.0F, 1F);
-			}
-
-			//on a double bounce, this has to come after the damage event
-			new BukkitRunnable() {
-				@Override
-				public void run() {
-					setMD(player,"noFall",true);
-				}
-			}.runTask(this);
-
-			Particle p = getSettings().getParticle();
-			if (p == null) {
-				return;
-			}
-
-			Location loc = player.getLocation().add(0, 0.5, 0);
-			DustOptions data = null;
-
-			if (p.getDataType() == Particle.DustOptions.class) {
-				data = new Particle.DustOptions(Color.RED, 1.5F);
-
-			} else if (p.getDataType() == Particle.DustTransition.class) {
-				data = new Particle.DustTransition(Color.YELLOW, Color.GREEN, 1.5F);
-
-			} else if (p.getDataType() != Void.class) {
-				return;
-			}
-
-			player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50, data);
+		if (block.getRelative(BlockFace.DOWN).getType() != getSettings().getLaunchBlock() || block.getType() != getSettings().getPlate()) {
+			return;
 		}
+
+		double force = getSettings().getForce();
+		if (getSettings().isVertical()) {
+			// launch the player - force applied will be 4.0 max
+			player.setVelocity(new Vector(player.getVelocity().getX(), force, player.getVelocity().getZ()));
+
+			// if the force is > max allowed, then re-launch player after 10 ticks
+			if (force > 4.0) {
+				new BukkitRunnable() {
+					boolean reLaunch = true;
+					double force = getSettings().getForce();
+					double newForce = 4.0;  // max force
+					@Override
+					public void run() {
+						if (!reLaunch || !player.isOnline()) {
+							this.cancel();
+							return;
+						}
+						if (force <= 6.0 ) {
+							newForce = force - 2;
+							reLaunch = false;
+						}
+						// keep re-launching player until is newForce is < 4.0
+						player.setVelocity(new Vector(player.getVelocity().getX(), newForce, player.getVelocity().getZ()));
+						force = force - 2;
+					}
+				}.runTaskTimer(this, 10L, 10L);
+			}
+		} else {
+			Vector velocity = player.getLocation().getDirection().normalize();
+			velocity.setY(1.0);
+			player.setVelocity(velocity.multiply(force));
+		}
+
+		if (getSettings().getSound() != null) {
+			player.getWorld().playSound(player.getLocation(), getSettings().getSound(), 5.0F, 1F);
+		}
+
+		//on a double bounce, this has to come after the damage event
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+				setMD(player,"noFall",true);
+			}
+		}.runTask(this);
+
+		Particle p = getSettings().getParticle();
+		if (p == null) {
+			return;
+		}
+
+		DustOptions data = null;
+		if (p.getDataType() == Particle.DustOptions.class) {
+			data = new Particle.DustOptions(getSettings().getParticleColour("Start"), 1.5F);
+
+		} else if (p.getDataType() == Particle.DustTransition.class) {
+			data = new Particle.DustTransition(getSettings().getParticleColour("Start"), getSettings().getParticleColour("End"), 1.5F);
+
+		} else if (p.getDataType() != Void.class) {
+			return;
+		}
+
+		Location loc = player.getLocation().add(0, 0.5, 0);
+		player.getWorld().spawnParticle(getSettings().getParticle(), loc, 50, data);
 	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)

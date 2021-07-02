@@ -25,7 +25,9 @@ SOFTWARE.
 package io.github.steve4744.launchplate;
 
 import java.io.File;
+import java.util.Map;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -42,6 +44,24 @@ public class Settings {
 	private File dataFolder;
 	private File stringFile;
 	private YamlConfiguration stringData;
+	private static final Map<String, Color> colours = Map.ofEntries(
+			Map.entry("AQUA", Color.AQUA),
+			Map.entry("BLACK", Color.BLACK),
+			Map.entry("BLUE", Color.BLUE),
+			Map.entry("FUCHSIA", Color.FUCHSIA),
+			Map.entry("GRAY", Color.GRAY),
+			Map.entry("GREEN", Color.GREEN),
+			Map.entry("LIME", Color.LIME),
+			Map.entry("MAROON", Color.MAROON),
+			Map.entry("NAVY", Color.NAVY),
+			Map.entry("OLIVE", Color.OLIVE),
+			Map.entry("ORANGE", Color.ORANGE),
+			Map.entry("PURPLE", Color.PURPLE),
+			Map.entry("RED", Color.RED),
+			Map.entry("SILVER", Color.SILVER),
+			Map.entry("TEAL", Color.TEAL),
+			Map.entry("WHITE", Color.WHITE),
+			Map.entry("YELLOW", Color.YELLOW));
 
 	public Settings(LaunchPlate plugin) {
 		this.plugin = plugin;
@@ -121,6 +141,11 @@ public class Settings {
 		return config.getString("Trail") != null ? Enums.getIfPresent(Particle.class, config.getString("Trail")).orNull() : null;
 	}
 
+	public Color getParticleColour(String phase) {
+		Color colour = plugin.getConfig().getColor("TrailData." + phase, Color.RED);
+		return colour;
+	}
+
 	public boolean isValid(Material plate) {
 		return Tag.PRESSURE_PLATES.isTagged(plate);
 	}
@@ -163,4 +188,17 @@ public class Settings {
 		plugin.saveConfig();
 	}
 
+	public void setParticleColour(String colour, String phase) {
+		String path = "TrailData." + phase;
+		plugin.getConfig().set(path, validateColour(colour.toUpperCase()));
+		plugin.saveConfig();
+	}
+
+	private Color validateColour(String colour) {
+		return colour != null ? colours.get(colour) : null;
+	}
+
+	public Map<String, Color> getColours() {
+		return colours;
+	}
 }
