@@ -9,7 +9,7 @@ No fall damage is inflicted on the players, so LaunchPlate can be used in any ga
 LaunchPlate can be used as a fun addition to a lobby/hub or even as an extension to a parkour course.
 
 ## Versions
-The latest version of LaunchPlate requires Java 16 and is for Minecraft 1.17+.
+The latest version of LaunchPlate requires Java 16 and is for Minecraft 1.17 and 1.18.
 
 Version 3.0 of Launchplate is supported on Minecraft 1.16.5.
 
@@ -45,21 +45,21 @@ All LaunchPlate versions can be [downloaded from Spigot](https://www.spigotmc.or
 
 The plugin LuckPerms uses the same command alias "lp", so although tab completion makes this redundant to some extent, there is an additional alias "lpl" which can be used for LaunchPlate if you also have the LuckPerms plugin on your server.
 
-    /lp setblock - set the base block of the launchplate (Material)
-    /lp setplate - set the type of pressure plate (Material)
-    /lp setsound - set a sound effect on launch
-    /lp settrail - set a particle effect on launch
-    /lp setforce - set force of bounce which determines the height achievable (default is 0.8)
-    /lp setvertical - if set to true (default), player will launch vertically
-    /lp reload - reloads the config.yml file
+    /lpl setblock - set the base block of the launchplate (Material)
+    /lpl setplate - set the type of pressure plate (Material)
+    /lpl setsound - set a sound effect on launch
+    /lpl settrail - set a particle effect on launch
+    /lpl setforce - set force of bounce which determines the height achievable (default is 0.8)
+    /lpl setvertical - if set to true (default), player will launch vertically
+    /lpl reload - reloads the config.yml file
 
 All of the above require the "launchplate.admin" permission
 
-    /lp help - display this list of commands
-    /lp list - display the current settings
-    /lp - information about the plugin
+    /lpl help - display this list of commands
+    /lpl list - display the current settings
+    /lpl - information about the plugin
 
 <br>
 <br>
-Updated 02 July 2021 by steve4744
+Updated 08 December 2021 by steve4744
 
