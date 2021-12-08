@@ -55,7 +55,6 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 
-		// Save a copy of the default config.yml if not exists
 		this.saveDefaultConfig();
 
 		instance = this;

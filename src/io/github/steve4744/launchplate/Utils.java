@@ -33,6 +33,8 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Content;
+import net.md_5.bungee.api.chat.hover.content.Text;
 
 public class Utils {
 
@@ -68,7 +70,9 @@ public class Utils {
 		if (isClickable) {
 			cmd.setColor(ChatColor.GREEN);
 			cmd.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, StringUtils.substringBefore(text, splitter)));
-			cmd.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click to select").create()));
+
+			Content content = new Text(new ComponentBuilder("Click to select").create());
+			cmd.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, content));
 
 			if (StringUtils.substringAfter(text, splitter).length() != 0) {
 				TextComponent arg = new TextComponent(splitter + StringUtils.substringAfter(text, splitter));
