@@ -4,6 +4,7 @@
 # Create a spring board using any block  #
 # and pressure plate.                    #
 ##########################################
+
 #  Block beneath the pressure plate
 Material: OBSIDIAN
 #

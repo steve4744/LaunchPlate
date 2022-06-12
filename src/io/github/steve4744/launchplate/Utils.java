@@ -24,7 +24,6 @@ SOFTWARE.
  */
 package io.github.steve4744.launchplate;
 
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -66,16 +65,16 @@ public class Utils {
 
 	private static TextComponent getTextComponent(String text, Boolean isClickable) {
 		String splitter = "[";
-		TextComponent cmd = new TextComponent(StringUtils.substringBefore(text, splitter));
+		TextComponent cmd = new TextComponent(getSubstringBefore(text, splitter));
 		if (isClickable) {
 			cmd.setColor(ChatColor.GREEN);
-			cmd.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, StringUtils.substringBefore(text, splitter)));
+			cmd.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, getSubstringBefore(text, splitter)));
 
 			Content content = new Text(new ComponentBuilder("Click to select").create());
 			cmd.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, content));
 
-			if (StringUtils.substringAfter(text, splitter).length() != 0) {
-				TextComponent arg = new TextComponent(splitter + StringUtils.substringAfter(text, splitter));
+			if (getSubstringAfter(text, splitter).length() != 0) {
+				TextComponent arg = new TextComponent(splitter + getSubstringAfter(text, splitter));
 				arg.setColor(ChatColor.YELLOW);
 				cmd.addExtra(arg);
 			}
@@ -90,5 +89,15 @@ public class Utils {
 		TextComponent tc = new TextComponent(delim);
 		tc.setColor(ChatColor.GRAY);
 		return tc;
+	}
+
+	private static String getSubstringBefore(String text, String splitter) {
+		int index = text.indexOf(splitter);
+		return index == -1 ? text : text.substring(0, index);
+	}
+
+	private static String getSubstringAfter(String text, String splitter) {
+		int index = text.indexOf(splitter);
+		return index == -1 ? "" : text.substring(index + 1);
 	}
 }
