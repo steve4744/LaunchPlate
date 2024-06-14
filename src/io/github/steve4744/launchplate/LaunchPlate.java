@@ -50,6 +50,7 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 	private String version;
 	private Settings settings;
 	private static LaunchPlate instance;
+	private static final int SPIGOT_ID = 42251;
 	private static final int BSTATS_PLUGIN_ID = 2145;
 
 	@Override
@@ -178,19 +179,20 @@ public class LaunchPlate extends JavaPlugin implements Listener {
 		if (!getConfig().getBoolean("Check_For_Update", true)) {
 			return;
 		}
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				String latestVersion = VersionChecker.getVersion();
-				if (latestVersion == "error") {
-					getLogger().info("Error attempting to check for new version. Please report it here: https://www.spigotmc.org/threads/launch-plate.248053/");
-				} else {
-					if (!version.equals(latestVersion)) {
-						getLogger().info("New version " + latestVersion + " available on Spigot: https://www.spigotmc.org/resources/launch-plate.42251/");
-					}
-				}
+		new VersionChecker(this, SPIGOT_ID).getVersion(latestVersion -> {
+			if (version.equals(latestVersion)) {
+				getLogger().info("You are running the most recent version");
+
+			} else if (version.contains("beta") || version.toLowerCase().contains("snapshot")) {
+				getLogger().info("You are running dev build: " + version);
+				getLogger().info("Latest release: " + latestVersion);
+
+			} else if (Character.isDigit(latestVersion.charAt(0))) {
+				getLogger().info("Current version: " + version);
+				getLogger().info("Latest release: " + latestVersion);
+				getLogger().info("Latest release available from Spigot: https://www.spigotmc.org/resources/LaunchPlate." + SPIGOT_ID + "/");
 			}
-		}.runTaskLaterAsynchronously(this, 30L);
+		});
 	}
 
 	public Settings getSettings() {
