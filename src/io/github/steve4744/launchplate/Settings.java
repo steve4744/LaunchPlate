@@ -29,13 +29,13 @@ import java.util.Map;
 
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.Tag;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import com.google.common.base.Enums;
 
 public class Settings {
 
@@ -133,12 +133,20 @@ public class Settings {
 		return config.getBoolean("Vertical_Bounce");
 	}
 
+	/**
+	 * Get the sound from the registry. The key uses dots instead of underscores.
+	 * Returns null if the sound is invalid.
+	 *
+	 * @return valid sound
+	 */
 	public Sound getSound() {
-		return config.getString("Sound") != null ? Enums.getIfPresent(Sound.class, config.getString("Sound")).orNull() : null;
+		NamespacedKey key = NamespacedKey.minecraft(config.getString("Sound").toLowerCase().replaceAll("_", "."));
+		return Registry.SOUNDS.get(key);
 	}
 
 	public Particle getParticle() {
-		return config.getString("Trail") != null ? Enums.getIfPresent(Particle.class, config.getString("Trail")).orNull() : null;
+		NamespacedKey key = NamespacedKey.minecraft(config.getString("Trail").toLowerCase());
+		return Registry.PARTICLE_TYPE.get(key);
 	}
 
 	public Color getParticleColour(String phase) {
@@ -151,7 +159,8 @@ public class Settings {
 	}
 
 	public boolean setSound(String soundEffect) {
-		if (Enums.getIfPresent(Sound.class, soundEffect).orNull() != null || soundEffect.equalsIgnoreCase("none")) {
+		NamespacedKey key = NamespacedKey.minecraft(soundEffect.toLowerCase().replaceAll("_", "."));
+		if (Registry.SOUNDS.get(key) != null || soundEffect.equalsIgnoreCase("none")) {
 			plugin.getConfig().set("Sound", soundEffect);
 			plugin.saveConfig();
 			return true;
@@ -160,7 +169,8 @@ public class Settings {
 	}
 
 	public boolean setParticle(String particleEffect) {
-		if (Enums.getIfPresent(Particle.class, particleEffect).orNull() != null || particleEffect.equalsIgnoreCase("none")) {
+		NamespacedKey key = NamespacedKey.minecraft(particleEffect.toLowerCase());
+		if (Registry.PARTICLE_TYPE.get(key) != null || particleEffect.equalsIgnoreCase("none")) {
 			plugin.getConfig().set("Trail", particleEffect);
 			plugin.saveConfig();
 			return true;

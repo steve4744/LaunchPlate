@@ -29,8 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.Registry;
 import org.bukkit.Tag;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -50,8 +49,8 @@ public class AutoTabCompleter implements TabCompleter {
 			return null;
 		}
 
-		List<String> list = new ArrayList<String>();
-		List<String> auto = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
+		List<String> auto = new ArrayList<>();
 
 		if (args.length == 1) {
 			list.addAll(COMMANDS);
@@ -61,16 +60,16 @@ public class AutoTabCompleter implements TabCompleter {
 
 		} else if (args.length == 2 && sender.hasPermission("launchplate.admin")) {
 			if (args[0].equalsIgnoreCase("setsound")) {
-				for (Sound sound : Arrays.asList(Sound.class.getEnumConstants())) {
+				Registry.SOUNDS.forEach(sound -> {
 					list.add(String.valueOf(sound));
-					list.add("none");
-				}
+				});
+				list.add("none");
 
 			} else if (args[0].equalsIgnoreCase("settrail")) {
-				for (Particle particle : Arrays.asList(Particle.class.getEnumConstants())) {
+				Registry.PARTICLE_TYPE.forEach(particle -> {
 					list.add(String.valueOf(particle));
-					list.add("none");
-				}
+				});
+				list.add("none");
 
 			} else if (args[0].equalsIgnoreCase("setplate")) {
 				for (Material plate : Tag.PRESSURE_PLATES.getValues()) {

@@ -99,7 +99,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 			}
 
 			if (args[0].equalsIgnoreCase("setsound")) {
-				if (plugin.getSettings().setSound(args[1].toUpperCase())) {
+				if (plugin.getSettings().setSound(args[1])) {
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Sound effect " + ChatColor.AQUA + args[1] + ChatColor.WHITE + " added");
 					return true;
 				} else {
@@ -107,7 +107,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				}
 
 			} else if (args[0].equalsIgnoreCase("settrail")) {
-				if (plugin.getSettings().setParticle(args[1].toUpperCase())) {
+				if (plugin.getSettings().setParticle(args[1])) {
 					sender.sendMessage(ChatColor.GREEN + "[LaunchPlate] " + ChatColor.WHITE + "Particle effect " + ChatColor.AQUA + args[1] + ChatColor.WHITE + " added");
 					if (args.length > 2 && args[2] != null) {
 						plugin.getSettings().setParticleColour(args[2], "Start");
