@@ -16,9 +16,9 @@ Version 3.4 requires Java 21 and Minecraft 1.20.6 - 1.21.
 
 The versions below are available for download but are no longer supported:
 
-Version 3.3 requires Java 17 and Minecraft 1.17.2 - 1.20.4.
-Version 3.2 requires Java 16 and Minecraft 1.17.2.
-Version 3.0 will run on Minecraft 1.16.5.
+Version 3.3 requires Java 17 and Minecraft 1.17.2 - 1.20.4.  
+Version 3.2 requires Java 16 and Minecraft 1.17.2.  
+Version 3.0 will run on Minecraft 1.16.5.  
 Version 2.5 will run on all Minecraft versions from 1.13 to 1.15.2.<br>
 Version 1.8 is for Minecraft 1.9 to 1.12.2 can be [downloaded from GitHub](https://github.com/steve4744/LaunchPlate/releases/download/v1.8/LaunchPlate.jar "LaunchPlate v1.8 by steve4744")<br>
 Version 1.7 is for Minecraft 1.8 can be downloaded from Spigot.
