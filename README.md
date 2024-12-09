@@ -9,14 +9,16 @@ No fall damage is inflicted on the players, so LaunchPlate can be used in any ga
 LaunchPlate can be used as a fun addition to a lobby/hub or even as an extension to a parkour course.
 
 ## Versions
-The latest version of LaunchPlate requires Java 21 and Minecraft 1.20.6 - 1.21.
 
-Version 3.3 of LaunchPlate requires Java 17 and Minecraft 1.17.2 - 1.20.4.
+The latest version of LaunchPlate requires a minimum of Minecraft 1.21.3
+
+Version 3.4 requires Java 21 and Minecraft 1.20.6 - 1.21.
 
 The versions below are available for download but are no longer supported:
 
-Version 3.2 of Launchplate requires Java 16 and Minecraft 1.17.2.
-Version 3.0 of Launchplate will run on Minecraft 1.16.5.
+Version 3.3 requires Java 17 and Minecraft 1.17.2 - 1.20.4.
+Version 3.2 requires Java 16 and Minecraft 1.17.2.
+Version 3.0 will run on Minecraft 1.16.5.
 Version 2.5 will run on all Minecraft versions from 1.13 to 1.15.2.<br>
 Version 1.8 is for Minecraft 1.9 to 1.12.2 can be [downloaded from GitHub](https://github.com/steve4744/LaunchPlate/releases/download/v1.8/LaunchPlate.jar "LaunchPlate v1.8 by steve4744")<br>
 Version 1.7 is for Minecraft 1.8 can be downloaded from Spigot.
@@ -63,5 +65,5 @@ All of the above require the "launchplate.admin" permission
 
 <br>
 <br>
-Updated 14 June 2024 by steve4744
+Updated 09 December 2024 by steve4744
 
