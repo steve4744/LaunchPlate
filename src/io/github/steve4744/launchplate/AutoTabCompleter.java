@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.Tag;
@@ -61,7 +62,10 @@ public class AutoTabCompleter implements TabCompleter {
 		} else if (args.length == 2 && sender.hasPermission("launchplate.admin")) {
 			if (args[0].equalsIgnoreCase("setsound")) {
 				Registry.SOUNDS.forEach(sound -> {
-					list.add(String.valueOf(sound));
+					String soundName = ((Keyed) sound).getKey().getKey()
+                            .replace(".", "_")
+                            .toUpperCase();
+					list.add(String.valueOf(soundName));
 				});
 				list.add("none");
 

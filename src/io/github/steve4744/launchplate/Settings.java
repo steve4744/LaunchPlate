@@ -28,6 +28,7 @@ import java.io.File;
 import java.util.Map;
 
 import org.bukkit.Color;
+import org.bukkit.Keyed;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Particle;
@@ -140,12 +141,25 @@ public class Settings {
 	 * @return valid sound
 	 */
 	public Sound getSound() {
-		NamespacedKey key = NamespacedKey.minecraft(config.getString("Sound").toLowerCase().replaceAll("_", "."));
+		String soundName = config.getString("Sound");
+		if (soundName == null) {
+			return null;
+		}
+		NamespacedKey key = NamespacedKey.minecraft(soundName.toLowerCase().replace("_", "."));
 		return Registry.SOUNDS.get(key);
 	}
 
+	public String getSoundName() {
+		String soundName = getSound() != null ? ((Keyed) getSound()).getKey().getKey() : "";
+		return soundName.toUpperCase().replace(".", "_");
+	}
+
 	public Particle getParticle() {
-		NamespacedKey key = NamespacedKey.minecraft(config.getString("Trail").toLowerCase());
+		String trailName = config.getString("Trail");
+		if (trailName == null) {
+			return null;
+		}
+		NamespacedKey key = NamespacedKey.minecraft(trailName.toLowerCase());
 		return Registry.PARTICLE_TYPE.get(key);
 	}
 
@@ -159,7 +173,7 @@ public class Settings {
 	}
 
 	public boolean setSound(String soundEffect) {
-		NamespacedKey key = NamespacedKey.minecraft(soundEffect.toLowerCase().replaceAll("_", "."));
+		NamespacedKey key = NamespacedKey.minecraft(soundEffect.toLowerCase().replace("_", "."));
 		if (Registry.SOUNDS.get(key) != null || soundEffect.equalsIgnoreCase("none")) {
 			plugin.getConfig().set("Sound", soundEffect);
 			plugin.saveConfig();

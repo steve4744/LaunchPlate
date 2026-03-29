@@ -57,7 +57,7 @@ public class LaunchPlateCommands implements CommandExecutor {
 				sender.sendMessage(ChatColor.YELLOW + "===============" + ChatColor.GREEN + " LaunchPlate " + ChatColor.YELLOW + "===============");
 				sender.sendMessage(ChatColor.GREEN + "Base block material : " + ChatColor.WHITE + plugin.getSettings().getLaunchBlock());
 				sender.sendMessage(ChatColor.GREEN + "Pressure plate type : " + ChatColor.WHITE + plugin.getSettings().getPlate());
-				sender.sendMessage(ChatColor.GREEN + "Launch sound effect : " + ChatColor.WHITE + plugin.getSettings().getSound());
+				sender.sendMessage(ChatColor.GREEN + "Launch sound effect : " + ChatColor.WHITE + plugin.getSettings().getSoundName());
 				sender.sendMessage(ChatColor.GREEN + "Launch particle effect : " + ChatColor.WHITE + plugin.getSettings().getParticle());
 				sender.sendMessage(ChatColor.GREEN + "Force applied : " + ChatColor.WHITE + plugin.getSettings().getForce());
 				sender.sendMessage(ChatColor.GREEN + "Vertical launch : " + ChatColor.WHITE + String.valueOf(plugin.getSettings().isVertical()));
